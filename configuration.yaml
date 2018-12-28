@@ -95,7 +95,7 @@ script: !include scripts.yaml
 asuswrt:
   host: 192.168.1.1
   username: !secret asuswrt_user
-  ssh_key: .ssh/id_rsa
+  ssh_key: !secret asuswrt_ssh_key
   
 binary_sensor:
   - platform: uptimerobot
