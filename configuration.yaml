@@ -1,0 +1,168 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Chicago
+  # Customization file
+  customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Enables the frontend
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Enables configuration UI
+config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+# map:
+
+# Track the sun
+sun:
+
+# Sensors
+sensor:
+  # Weather prediction
+  # - platform: yr
+  - platform: deluge
+    host: !secret deluge_host
+    username: !secret deluge_user
+    password: !secret deluge_password
+    monitored_variables:
+      - current_status
+      - download_speed
+      - upload_speed
+  - platform: pi_hole
+    host: !secret pihole_host
+    ssl: true
+    monitored_conditions:
+      - ads_blocked_today
+      - ads_percentage_today
+      - dns_queries_today
+      - queries_cached
+      - unique_clients
+      - unique_domains
+
+# Text to speech
+tts:
+  - platform: google
+
+# Cloud
+cloud:
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+##
+# Customizations
+##
+
+asuswrt:
+  host: 192.168.1.1
+  username: !secret asuswrt_user
+  ssh_key: .ssh/id_rsa
+  
+binary_sensor:
+  - platform: uptimerobot
+    api_key: !secret uptimerobot_api_key
+  - platform: linode
+    nodes: !secret linode_nodes
+  
+device_tracker:
+  - platform: asuswrt
+  - platform: bluetooth_tracker
+  
+google_assistant:
+  project_id: !secret google_assistant_project_id
+  api_key: !secret google_assistant_api_key
+
+linode:
+  access_token: !secret linode_access_token
+
+media_player:
+  - platform: plex
+    entity_namespace: plex
+    include_non_clients: true
+    scan_interval: 5
+    show_all_controls: false
+    use_custom_entity_ids: true
+    use_episode_art: true
+    remove_unavailable_clients: true
+    client_remove_interval: 600
+  - platform: braviatv
+    host: 192.168.1.123
+
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
+
+panel_iframe:
+  configurator:
+    title: Configurator
+    icon: mdi:wrench
+    url: !secret configurator_url
+  nodered:
+    title: Node-Red
+    icon: mdi:shuffle-variant
+    url: !secret nodered_url
+  portainer:
+    title: Portainer
+    icon: mdi:docker
+    url: !secret portainer_url
+
+switch:
+  - platform: deluge
+    host: !secret deluge_host
+    username: !secret deluge_user
+    password: !secret deluge_password
+  - platform: tplink
+    host: 192.168.1.21
+  - platform: tplink
+    host: 192.168.1.29
+  - platform: tplink
+    host: 192.168.1.32
+  - platform: tplink
+    host: 192.168.1.39
+  - platform: tplink
+    host: 192.168.1.96
+  - platform: tplink
+    host: 192.168.1.210
+
+weather:
+  - platform: darksky
+    api_key: !secret darksky_api_key
