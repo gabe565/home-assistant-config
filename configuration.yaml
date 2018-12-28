@@ -102,6 +102,9 @@ binary_sensor:
     api_key: !secret uptimerobot_api_key
   - platform: linode
     nodes: !secret linode_nodes
+  - platform: workday
+    country: US
+    province: OK
   
 device_tracker:
   - platform: asuswrt
