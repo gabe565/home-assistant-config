@@ -1,0 +1,66 @@
+# Weather prediction
+# - platform: yr
+- platform: deluge
+  host: !secret deluge_host
+  username: !secret deluge_user
+  password: !secret deluge_password
+  monitored_variables:
+    - current_status
+    - download_speed
+    - upload_speed
+- platform: pi_hole
+  host: !secret pihole_host
+  ssl: true
+  monitored_conditions:
+    - ads_blocked_today
+    - ads_percentage_today
+    - dns_queries_today
+    - queries_cached
+    - unique_clients
+    - unique_domains
+- platform: darksky
+  api_key: !secret darksky_api_key
+  forecast:
+    - 0
+  monitored_conditions:
+    - temperature
+    - apparent_temperature
+    - temperature_min
+    - temperature_max
+    - humidity
+    - precip_probability
+    - precip_intensity
+    - precip_type
+    - wind_speed
+    - wind_bearing
+    - pressure
+    - icon
+  update_interval: 00:03
+- platform: mqtt
+  state_topic: 'monitor/living room/B4:F1:DA:28:63:9A'
+  value_template: '{{ value_json.confidence }}'
+  unit_of_measurement: '%'
+  name: "Gabe's Phone"
+  unique_id: bt_gabes_phone
+- platform: mqtt
+  state_topic: 'monitor/living room/DC:41:5F:4E:A8:62'
+  value_template: '{{ value_json.confidence }}'
+  unit_of_measurement: '%'
+  name: "Liv's Phone"
+  unique_id: bt_livs_phone
+- platform: nightscout
+  resource: !secret nightscout_url
+  # value_template: "{{ value_json[0].sgv }}"
+  # unit_of_measurement: "mg/dl"
+  name: "Blood Sugar"
+  force_update: true
+- platform: mqtt
+  state_topic: 'living room/temperature'
+  value_template: '{{ value | round(0) }}'
+  unit_of_measurement: '°F'
+  name: 'Living Room Temperature'
+- platform: mqtt
+  state_topic: 'living room/humidity'
+  value_template: '{{ value | round(0) }}'
+  unit_of_measurement: '%'
+  name: 'Living Room Humidity'

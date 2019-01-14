@@ -1,0 +1,9 @@
+living_room_light_mode:
+  alias: Living Room Light Mode
+  sequence:
+  - data:
+      code: 481 428 927 899 469 889 487 880 471 449 916 902 468 456 912 459 916 450
+        921 452 914 896 466 466 902 908 466 455 912 908 460 460 913 904 471 455 914
+        448 925 897 463 457 910 902 464 463 905 913 450 10393
+      protocol: raw
+    service: pilight.send

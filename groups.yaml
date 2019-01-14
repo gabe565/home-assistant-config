@@ -1,32 +1,40 @@
 living_room_lights:
   entities:
+    - input_boolean.living_room_light
     - switch.living_room_tall_lamp
     - switch.living_room_square_lamp
     - switch.living_room_lamp
+  icon: mdi:lightbulb
   name: "Living Room Lights"
 front_yard_lights:
   entities:
     - switch.garage_lights
-    - switch.porch_light
+    - switch.porch_lights
+  icon: mdi:lightbulb
   name: "Front Yard Lights"
 gabe_presence:
   entities:
     - device_tracker.wifi_gabes_phone
-    - device_tracker.bt_gabes_phone
+    - sensor.bt_gabes_phone
   icon: mdi:android
   name: "Gabe Presence"
   view: no
 maya_presence:
   entities:
     - device_tracker.wifi_mayas_phone
-    - device_tracker.bt_mayas_phone
   icon: mdi:apple
   name: "Maya Presence"
   view: no
 liv_presence:
   entities:
     - device_tracker.wifi_livs_phone
-    - device_tracker.bt_livs_phone
+    - sensor.bt_livs_phone
   icon: mdi:apple
   name: "Liv Presence"
   view: no
+master_bedroom_lights:
+  entities:
+    - light.master_bedroom_left_lamp
+    - light.master_bedroom_right_lamp
+  icon: mdi:lightbulb
+  name: "Master Bedroom Lights"

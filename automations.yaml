@@ -1,21 +1,12 @@
-- id: '1545927223051'
-  alias: Turn Front Yard Lights On at Sunset
+- id: '1546157053732'
+  alias: Turn Off the Master Bedroom Heater After 1 Hour
   trigger:
-  - event: sunset
-    platform: sun
-  condition: []
-  action:
-  - alias: ''
-    data:
-      entity_id: group.front_yard_lights
-    service: switch.turn_on
-- id: '1545927387010'
-  alias: Turn Front Yard Lights On at Sunrise
-  trigger:
-  - event: sunrise
-    platform: sun
+  - entity_id: switch.master_bedroom_heater
+    for: '1:00:00'
+    platform: state
+    to: 'on'
   condition: []
   action:
   - data:
-      entity_id: group.front_yard_lights
-    service: script.turn_off
+      entity_id: switch.master_bedroom_heater
+    service: switch.turn_off

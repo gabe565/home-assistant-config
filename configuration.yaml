@@ -24,8 +24,10 @@ frontend:
 config:
 
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-# http:
-#   base_url: example.duckdns.org:8123
+http:
+  base_url: !secret http_base_url
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -55,27 +57,7 @@ logbook:
 sun:
 
 # Sensors
-sensor:
-  # Weather prediction
-  # - platform: yr
-  - platform: deluge
-    host: !secret deluge_host
-    username: !secret deluge_user
-    password: !secret deluge_password
-    monitored_variables:
-      - current_status
-      - download_speed
-      - upload_speed
-  - platform: pi_hole
-    host: !secret pihole_host
-    ssl: true
-    monitored_conditions:
-      - ads_blocked_today
-      - ads_percentage_today
-      - dns_queries_today
-      - queries_cached
-      - unique_clients
-      - unique_domains
+sensor: !include sensors.yaml
 
 # Text to speech
 tts:
@@ -108,11 +90,110 @@ binary_sensor:
   
 device_tracker:
   - platform: asuswrt
-  - platform: bluetooth_tracker
-  
+    new_device_defaults:
+      track_new_devices: false
+  # - platform: googlehome
+    # host: 192.168.1.211
+    # new_device_defaults:
+      # track_new_devices: false
+  # - platform: googlehome
+    # host: 192.168.1.26
+    # new_device_defaults:
+      # track_new_devices: false
+  # - platform: googlehome
+    # host: 192.168.1.30
+    # new_device_defaults:
+      # track_new_devices: false
+  # - platform: googlehome
+    # host: 192.168.1.204
+    # new_device_defaults:
+      # track_new_devices: false
+
+fan:
+  - platform: template
+    fans:
+      living_room:
+        friendly_name: "Living Room Fan"
+        value_template: "{{ states('input_boolean.living_room_fan_state') }}"
+        speed_template: "{{ states('input_select.living_room_fan_speed') }}"
+        direction_template: "{{ states('input_select.living_room_fan_direction') }}"
+        turn_on:
+          service: homeassistant.turn_on
+          data_template:
+            entity_id: input_boolean.living_room_fan_state
+        turn_off:
+          service: homeassistant.turn_off
+          data_template:
+            entity_id: input_boolean.living_room_fan_state
+        set_speed:
+          service: input_select.select_option
+          data_template:
+            entity_id: input_select.living_room_fan_speed
+            option: "{{ speed }}"
+        set_direction:
+          service: input_select.select_option
+          data_template:
+            entity_id: input_select.living_room_fan_direction
+            option: "{{ direction }}"
+        speeds:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+
 google_assistant:
   project_id: !secret google_assistant_project_id
   api_key: !secret google_assistant_api_key
+  expose_by_default: false
+  entity_config:
+    input_boolean.living_room_light:
+      name: Main Light
+      expose: true
+      aliases:
+        - Living Room Ceiling Light
+        - Ceiling Light
+    fan.living_room_fan:
+      name: Ceiling Fan
+      expose: true
+      aliases:
+        - Living Room Ceiling Fan
+    script.living_room_light_mode:
+      name: Living Room Light Mode
+      expose: true
+    light.master_bedroom_left_lamp:
+      expose: true
+      name: Master Bedroom Left Lamp
+    light.master_bedroom_right_lamp:
+      expose: true
+      name: Master Bedroom Right Lamp
+
+input_boolean:
+  living_room_light:
+    name: Living Room Light
+    icon: mdi:lightbulb
+  living_room_fan_state:
+    name: Living Room Fan
+    icon: mdi:fan
+
+input_select:
+  living_room_fan_direction:
+    name: Living Room Fan Direction
+    icon: mdi:fan
+    options:
+      - forward
+      - reverse
+  living_room_fan_speed:
+    name: Living Room Fan Speed
+    icon: mdi:fan
+    options:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
 
 linode:
   access_token: !secret linode_access_token
@@ -130,6 +211,11 @@ media_player:
   - platform: braviatv
     host: 192.168.1.123
 
+mqtt:
+  broker: 127.0.0.1
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+
 nest:
   client_id: !secret nest_client_id
   client_secret: !secret nest_client_secret
@@ -143,10 +229,10 @@ panel_iframe:
     title: Node-Red
     icon: mdi:shuffle-variant
     url: !secret nodered_url
-  portainer:
-    title: Portainer
-    icon: mdi:docker
-    url: !secret portainer_url
+
+pilight:
+  host: raspberrypi.lan
+  port: 5000
 
 recorder:
   db_url: !secret recorder_db_url
