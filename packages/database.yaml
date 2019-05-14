@@ -1,0 +1,5 @@
+influxdb:
+  host: !secret influxdb_host
+
+recorder:
+  db_url: !secret recorder_db_url

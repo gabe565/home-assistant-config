@@ -1,0 +1,58 @@
+google_assistant:
+  entity_config:
+    binary_sensor.side_door:
+      expose: true
+      aliases:
+        - Side Yard Door
+      room: Side Yard
+
+    binary_sensor.inner_back_door:
+      expose: true
+      aliases:
+        - Inner Back Door
+      room: Living Room
+    binary_sensor.outer_back_door:
+      expose: true
+      aliases:
+        - Outer Back Door
+      room: Living Room
+      
+    binary_sensor.front_door:
+      expose: true
+      aliases:
+        - Front Door
+      room: Front Hallway
+
+    binary_sensor.laundry_room_door:
+      expose: true
+      aliases:
+        - Laundry Room Door
+      room: Laundry Room
+
+homeassistant:
+  customize_glob:
+    light.gateway_light_*:
+      friendly_name: Xiaomi Gateway Light
+  customize:
+    binary_sensor.front_door:
+      device_class: door
+    binary_sensor.inner_back_door:
+      device_class: door
+    binary_sensor.side_door:
+      device_class: door
+    binary_sensor.laundry_room_door:
+      device_class: door
+    binary_sensor.outer_back_door:
+      device_class: door
+
+vacuum:
+  - platform: xiaomi_miio
+    host: !secret xiaomi_vacuum_host
+    token: !secret xiaomi_vacuum_token
+
+xiaomi_aqara:
+  discovery_retry: 10
+  gateways:
+    - host: !secret xiaomi_aqara_host
+      key: !secret xiaomi_aqara_key
+      mac: !secret xiaomi_aqara_mac

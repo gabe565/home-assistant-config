@@ -1,0 +1,8 @@
+rest_command:
+  assistant_relay:
+    headers:
+      accept: application/json
+    payload: '{"broadcast":true,"command":"{{ message }}"}'
+    content_type:  'application/json; charset=utf-8'
+    method: POST
+    url: !secret assistant_relay_url

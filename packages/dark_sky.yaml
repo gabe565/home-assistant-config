@@ -1,0 +1,21 @@
+sensor:
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    forecast:
+      - 0
+    monitored_conditions:
+      - temperature
+      - apparent_temperature
+      - humidity
+      - precip_probability
+      - precip_intensity
+      - precip_type
+      - wind_speed
+      - wind_bearing
+      - pressure
+      - icon
+    scan_interval: 00:03
+
+weather:
+  - platform: darksky
+    api_key: !secret darksky_api_key

@@ -12,13 +12,12 @@ homeassistant:
   time_zone: America/Chicago
   # Customization file
   customize: !include customize.yaml
-
-# Show links to resources in log and frontend
-# introduction:
+  packages: !include_dir_named packages
 
 # Enables the frontend
 frontend:
   themes: !include_dir_merge_named themes
+  javascript_version: latest
 
 # Enables configuration UI
 config:
@@ -26,23 +25,17 @@ config:
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
 http:
   base_url: !secret http_base_url
-  ssl_certificate: /ssl/fullchain.pem
-  ssl_key: /ssl/privkey.pem
+  login_attempts_threshold: 6
+  ip_ban_enabled: true
+  use_x_forwarded_for: true
+  trusted_proxies: !secret http_trusted_proxies
 
 # Checks for available updates
-# Note: This component will send some information about your system to
-# the developers to assist with development of Home Assistant.
-# For more information, please see:
-# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
 updater:
-  # Optional, allows Home Assistant developers to focus on popular components.
-  # include_used_components: true
+  include_used_components: true
 
 # Discover some devices automatically
 discovery:
-
-# Allows you to issue voice commands from the frontend in enabled browsers
-conversation:
 
 # Enables support for tracking state changes over time
 history:
@@ -50,211 +43,19 @@ history:
 # View all events in a logbook
 logbook:
 
-# Enables a map showing the location of tracked devices
-# map:
+logger:
+  default: warn
 
 # Track the sun
 sun:
 
-# Sensors
-sensor: !include sensors.yaml
-
 # Text to speech
 tts:
-  - platform: google
+  - platform: google_translate
+    service_name: google_say
 
-# Cloud
-cloud:
-
-group: !include groups.yaml
+# group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 
-##
-# Customizations
-##
-
-asuswrt:
-  host: 192.168.1.1
-  username: !secret asuswrt_user
-  ssh_key: !secret asuswrt_ssh_key
-  
-binary_sensor:
-  - platform: uptimerobot
-    api_key: !secret uptimerobot_api_key
-  - platform: linode
-    nodes: !secret linode_nodes
-  - platform: workday
-    country: US
-    province: OK
-  
-device_tracker:
-  - platform: asuswrt
-    new_device_defaults:
-      track_new_devices: false
-  # - platform: googlehome
-    # host: 192.168.1.211
-    # new_device_defaults:
-      # track_new_devices: false
-  # - platform: googlehome
-    # host: 192.168.1.26
-    # new_device_defaults:
-      # track_new_devices: false
-  # - platform: googlehome
-    # host: 192.168.1.30
-    # new_device_defaults:
-      # track_new_devices: false
-  # - platform: googlehome
-    # host: 192.168.1.204
-    # new_device_defaults:
-      # track_new_devices: false
-
-fan:
-  - platform: template
-    fans:
-      living_room:
-        friendly_name: "Living Room Fan"
-        value_template: "{{ states('input_boolean.living_room_fan_state') }}"
-        speed_template: "{{ states('input_select.living_room_fan_speed') }}"
-        direction_template: "{{ states('input_select.living_room_fan_direction') }}"
-        turn_on:
-          service: homeassistant.turn_on
-          data_template:
-            entity_id: input_boolean.living_room_fan_state
-        turn_off:
-          service: homeassistant.turn_off
-          data_template:
-            entity_id: input_boolean.living_room_fan_state
-        set_speed:
-          service: input_select.select_option
-          data_template:
-            entity_id: input_select.living_room_fan_speed
-            option: "{{ speed }}"
-        set_direction:
-          service: input_select.select_option
-          data_template:
-            entity_id: input_select.living_room_fan_direction
-            option: "{{ direction }}"
-        speeds:
-          - '1'
-          - '2'
-          - '3'
-          - '4'
-          - '5'
-          - '6'
-
-google_assistant:
-  project_id: !secret google_assistant_project_id
-  api_key: !secret google_assistant_api_key
-  expose_by_default: false
-  entity_config:
-    input_boolean.living_room_light:
-      name: Main Light
-      expose: true
-      aliases:
-        - Living Room Ceiling Light
-        - Ceiling Light
-    fan.living_room_fan:
-      name: Ceiling Fan
-      expose: true
-      aliases:
-        - Living Room Ceiling Fan
-    script.living_room_light_mode:
-      name: Living Room Light Mode
-      expose: true
-    light.master_bedroom_left_lamp:
-      expose: true
-      name: Master Bedroom Left Lamp
-    light.master_bedroom_right_lamp:
-      expose: true
-      name: Master Bedroom Right Lamp
-
-input_boolean:
-  living_room_light:
-    name: Living Room Light
-    icon: mdi:lightbulb
-  living_room_fan_state:
-    name: Living Room Fan
-    icon: mdi:fan
-
-input_select:
-  living_room_fan_direction:
-    name: Living Room Fan Direction
-    icon: mdi:fan
-    options:
-      - forward
-      - reverse
-  living_room_fan_speed:
-    name: Living Room Fan Speed
-    icon: mdi:fan
-    options:
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-
-linode:
-  access_token: !secret linode_access_token
-
-media_player:
-  - platform: plex
-    entity_namespace: plex
-    include_non_clients: true
-    scan_interval: 5
-    show_all_controls: false
-    use_custom_entity_ids: true
-    use_episode_art: true
-    remove_unavailable_clients: true
-    client_remove_interval: 600
-  - platform: braviatv
-    host: 192.168.1.123
-
-mqtt:
-  broker: 127.0.0.1
-  username: !secret mqtt_username
-  password: !secret mqtt_password
-
-nest:
-  client_id: !secret nest_client_id
-  client_secret: !secret nest_client_secret
-
-panel_iframe:
-  configurator:
-    title: Configurator
-    icon: mdi:wrench
-    url: !secret configurator_url
-  nodered:
-    title: Node-Red
-    icon: mdi:shuffle-variant
-    url: !secret nodered_url
-
-pilight:
-  host: raspberrypi.lan
-  port: 5000
-
-recorder:
-  db_url: !secret recorder_db_url
-
-switch:
-  - platform: deluge
-    host: !secret deluge_host
-    username: !secret deluge_user
-    password: !secret deluge_password
-  - platform: tplink
-    host: 192.168.1.21
-  - platform: tplink
-    host: 192.168.1.29
-  - platform: tplink
-    host: 192.168.1.32
-  - platform: tplink
-    host: 192.168.1.39
-  - platform: tplink
-    host: 192.168.1.96
-  - platform: tplink
-    host: 192.168.1.210
-
-weather:
-  - platform: darksky
-    api_key: !secret darksky_api_key
+system_health:

@@ -1,0 +1,9 @@
+asuswrt:
+  host: 192.168.1.1
+  username: !secret asuswrt_user
+  ssh_key: !secret asuswrt_ssh_key
+
+device_tracker:
+  - platform: asuswrt
+    new_device_defaults:
+      track_new_devices: false

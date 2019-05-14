@@ -1,0 +1,66 @@
+fan:
+  - platform: template
+    fans:
+      living_room:
+        friendly_name: "Living Room Fan"
+        value_template: "{{ states('input_boolean.living_room_fan_state') }}"
+        speed_template: "{{ states('input_number.living_room_fan_speed') | int }}"
+        direction_template: "{{ states('input_select.living_room_fan_direction') }}"
+        turn_on:
+          service: homeassistant.turn_on
+          data_template:
+            entity_id: input_boolean.living_room_fan_state
+        turn_off:
+          service: homeassistant.turn_off
+          data_template:
+            entity_id: input_boolean.living_room_fan_state
+        set_speed:
+          service: input_number.set_value
+          data_template:
+            entity_id: input_number.living_room_fan_speed
+            value: "{{ speed }}"
+        set_direction:
+          service: input_select.select_option
+          data_template:
+            entity_id: input_select.living_room_fan_direction
+            option: "{{ direction }}"
+        speeds:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+
+google_assistant:
+  entity_config:
+    fan.living_room:
+      expose: true
+      aliases:
+        - Ceiling Fan
+      room: Living Room
+
+homeassistant:
+  customize:
+    fan.living_room:
+      icon: mdi:fan
+
+input_boolean:
+  living_room_fan_state:
+    name: Living Room Fan
+    icon: mdi:fan
+
+input_number:
+  living_room_fan_speed:
+    min: 1
+    max: 6
+    name: Living Room Fan Speed
+    icon: mdi:fan
+
+input_select:
+  living_room_fan_direction:
+    name: Living Room Fan Direction
+    icon: mdi:fan
+    options:
+      - forward
+      - reverse

@@ -1,0 +1,33 @@
+google_assistant:
+  entity_config:
+    switch.pihole_state:
+      expose: true
+      aliases:
+        - Ad Blocker
+        - Pi-Hole
+
+homeassistant:
+  customize:
+    switch.pihole_state:
+      icon: mdi:cancel
+
+sensor:
+  - platform: pi_hole
+    host: !secret pihole_host
+    monitored_conditions:
+      - ads_blocked_today
+      - ads_percentage_today
+      - dns_queries_today
+      - queries_cached
+      - unique_clients
+      - unique_domains
+
+switch:
+  - platform: command_line
+    switches:
+      pihole_state:
+        friendly_name: Pi-Hole State
+        command_on: !secret pihole_command_on
+        command_off: !secret pihole_command_off
+        command_state: !secret pihole_command_state
+        value_template: "{{ value_json.status == 'enabled' }}"

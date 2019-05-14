@@ -1,7 +1,0 @@
-binary_sensor.hallway_thermostat_has_leaf:
-  friendly_name: Hallway Thermostat eco mode
-  icon: mdi:leaf
-binary_sensor.hallway_thermostat_fan:
-  icon: mdi:fan
-binary_sensor.hallway_thermostat_is_locked:
-  icon: mdi:lock

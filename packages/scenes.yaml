@@ -1,0 +1,56 @@
+google_assistant:
+  entity_config:
+
+    scene.living_room_theater:
+      expose: true
+      aliases:
+        - Home Theater
+      room: Living Room
+
+    scene.kitchen_run_lighting:
+      expose: true
+      aliases:
+        - Kitchen Run Lighting
+
+scene:
+
+  - name: Kitchen Run Lighting
+    entities:
+      light.hallway_main_lights:
+        state: true
+        brightness: 30
+        transition: 6
+      light.front_hallway_main_lights:
+        state: true
+        brightness: 35
+        transition: 9
+      light.kitchen_light_group:
+        state: true
+        brightness: 40
+        transition: 12
+
+  - name: Living Room Theater
+    entities:
+      light.living_room_ceiling_fan_light:
+        state: true
+        brightness: 192
+      group.living_room_lamps: false
+      media_player.sony_bravia_tv: true
+
+  - name: Master Bedroom Romantic
+    entities:
+      light.master_bedroom_gabe_lamp:
+        state: true
+        brightness: 51
+        effect: colorloop
+        transition: 10
+      light.master_bedroom_liv_lamp:
+        state: true
+        brightness: 51
+        effect: colorloop
+        transition: 10
+      light.master_bedroom_ceiling_fan_light:
+        state: false
+        transition: 10
+      switch.master_bedroom_heater:
+        state: true

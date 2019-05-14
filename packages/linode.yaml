@@ -1,0 +1,6 @@
+linode:
+  access_token: !secret linode_access_token
+
+binary_sensor:
+  - platform: linode
+    nodes: !secret linode_nodes

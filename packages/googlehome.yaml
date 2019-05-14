@@ -1,0 +1,40 @@
+# device_tracker:
+#   - platform: googlehome
+#     consider_home: 10
+#     host: 192.168.1.211
+#     # interval_seconds: 5
+#     new_device_defaults:
+#       track_new_devices: false
+#     rssi_threshold: -100
+#   - platform: googlehome
+#     consider_home: 10
+#     host: 192.168.1.26
+#     # interval_seconds: 5
+#     new_device_defaults:
+#       track_new_devices: false
+#     rssi_threshold: -100
+#   - platform: googlehome
+#     consider_home: 10
+#     host: 192.168.1.30
+#     # interval_seconds: 5
+#     new_device_defaults:
+#       track_new_devices: false
+#     rssi_threshold: -100
+#   - platform: googlehome
+#     consider_home: 10
+#     host: 192.168.1.204
+#     # interval_seconds: 5
+#     new_device_defaults:
+#       track_new_devices: false
+#     rssi_threshold: -100
+
+googlehome:
+  devices:
+    - host: 192.168.1.211
+      track_alarms: true
+    - host: 192.168.1.26
+      track_alarms: true
+    - host: 192.168.1.30
+      track_alarms: true
+    - host: 192.168.1.204
+      track_alarms: true

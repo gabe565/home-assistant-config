@@ -1,0 +1,9 @@
+homeassistant:
+  customize:
+    sensor.blood_sugar:
+      icon: mdi:water
+
+sensor:
+  - platform: nightscout
+    resource: !secret nightscout_url
+    name: "Blood Sugar"

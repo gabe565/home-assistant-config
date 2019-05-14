@@ -1,0 +1,26 @@
+media_player:
+  - platform: braviatv
+    host: 192.168.1.123
+
+  - platform: androidtv
+    host: 192.168.1.18
+    name: "SHIELD"
+    apps:
+      "com.google.android.tvlauncher": Launcher
+      "com.google.android.youtube.tv": YouTube
+      "com.netflix.ninja": Netflix
+      "com.plexapp.android": Plex
+      "com.google.android.youtube.tvunplugged": YouTube TV
+      "com.spotify.tv.android": Spotify
+      "com.google.android.music": Google Play Music
+      "tv.twitch.android.app": Twitch
+      "com.nvidia.tegrazone3": NVIDIA Games
+      "com.amazon.amazonvideo.livingroom": Amazon Prime Video
+    adb_server_ip: 127.0.0.1
+    adb_server_port: 5037
+    scan_interval: 5
+
+notify:
+  - platform: nfandroidtv
+    name: Living Room
+    host: 192.168.1.123

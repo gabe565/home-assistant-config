@@ -1,11 +1,10 @@
-# Example .gitignore file for your config dir.
 # A * ensures that everything will be ignored.
 *
 
 # You can whitelist files/folders with !, these will not be ignored.
+!.gitignore
 !*.yaml
 !*.yml
-!.gitignore
 !*.md
 
 # Ignore folders.
@@ -17,3 +16,10 @@
 ip_bans.yaml
 secrets.yaml
 known_devices.yaml
+
+# Allow the following subfolders
+!packages
+!node-red
+
+# Node-RED Flows
+!node-red/flows.json
