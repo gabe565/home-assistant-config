@@ -21,12 +21,16 @@ google_assistant:
       expose: true
       aliases:
         - Morning Mode
+    
+    scene.night:
+      expose: true
+      aliases:
+        - Night Mode
 
     scene.away:
       expose: true
       aliases:
         - Away Mode
-        - Away
 
 scene:
 
@@ -58,6 +62,11 @@ scene:
         option: 'Off'
       media_player.sony_bravia_tv: false
       switch.breath_of_the_wild_poster: false
+
+  - name: Night
+    entities:
+      group.main_house_lights: false
+      group.study_lights: false
 
   - name: Kitchen Run Lighting
     entities:
@@ -99,6 +108,6 @@ scene:
         transition: 10
       light.master_bedroom_ceiling_fan_light:
         state: false
-        transition: 10
+        transition: 5
       switch.master_bedroom_fireplace:
         state: true
