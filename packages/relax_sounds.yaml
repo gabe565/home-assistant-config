@@ -1,0 +1,125 @@
+google_assistant:
+  entity_config:
+    scene.master_bedroom_babbling_brook_sounds:
+      expose: true
+      aliases:
+        - Babbling Brook Sounds
+      room: Master Bedroom
+
+    scene.master_bedroom_country_night_sounds:
+      expose: true
+      aliases:
+        - Country Night Sounds
+      room: Master Bedroom
+
+    scene.master_bedroom_fireplace_sounds:
+      expose: true
+      aliases:
+        - Fireplace Sounds
+      room: Master Bedroom
+
+    scene.master_bedroom_forest_sounds:
+      expose: true
+      aliases:
+        - Forest Sounds
+      room: Master Bedroom
+
+    scene.master_bedroom_ocean_sounds:
+      expose: true
+      aliases:
+        - Ocean Sounds
+      room: Master Bedroom
+
+    scene.master_bedroom_oscillating_fan_sounds:
+      expose: true
+      aliases:
+        - Oscillating Fan Sounds
+      room: Master Bedroom
+
+    scene.master_bedroom_rain_sounds:
+      expose: true
+      aliases:
+        - Rain Sounds
+      room: Master Bedroom
+
+    scene.master_bedroom_river_sounds:
+      expose: true
+      aliases:
+        - River Sounds
+      room: Master Bedroom
+
+    scene.master_bedroom_thunderstorm_sounds:
+      expose: true
+      aliases:
+        - Thunderstorm Sounds
+      room: Master Bedroom
+
+
+homeassistant:
+  customize_glob:
+    scene.master_bedroom_*_sounds:
+      icon: mdi:sleep
+
+
+input_select:
+  master_bedroom_relax_sounds:
+    name: Relax Sounds
+    icon: mdi:weather-night
+    options:
+      - 'Off'
+      - Babbling Brook
+      - Country Night
+      - Fireplace
+      - Forest
+      - Ocean
+      - Oscillating Fan
+      - Rain
+      - River
+      - Thunderstorm
+
+
+scene:
+  - name: Master Bedroom Babbling Brook Sounds
+    entities:
+      input_select.master_bedroom_relax_sounds:
+        option: Babbling Brook
+
+  - name: Master Bedroom Country Night Sounds
+    entities:
+      input_select.master_bedroom_relax_sounds:
+        option: Country Night
+
+  - name: Master Bedroom Fireplace Sounds
+    entities:
+      input_select.master_bedroom_relax_sounds:
+        option: Fireplace
+
+  - name: Master Bedroom Forest Sounds
+    entities:
+      input_select.master_bedroom_relax_sounds:
+        option: Forest
+
+  - name: Master Bedroom Ocean Sounds
+    entities:
+      input_select.master_bedroom_relax_sounds:
+        option: Ocean
+
+  - name: Master Bedroom Oscillating Fan Sounds
+    entities:
+      input_select.master_bedroom_relax_sounds:
+        option: Oscillating Fan
+
+  - name: Master Bedroom Rain Sounds
+    entities:
+      input_select.master_bedroom_relax_sounds:
+        option: Rain
+
+  - name: Master Bedroom River Sounds
+    entities:
+      input_select.master_bedroom_relax_sounds:
+        option: River
+
+  - name: Master Bedroom Thunderstorm Sounds
+    entities:
+      input_select.master_bedroom_relax_sounds:
+        option: Thunderstorm

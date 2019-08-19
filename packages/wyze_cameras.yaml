@@ -1,0 +1,13 @@
+camera:
+  - platform: generic
+    name: Wyze
+    username: root
+    password: ismart12
+    authentication: basic
+    still_image_url: https://192.168.1.119/cgi-bin/currentpic.cgi
+    verify_ssl: false
+    scan_interval: 5
+
+  # - platform: ffmpeg
+  #   name: Wyze
+  #   input: -rtsp_transport tcp -i rtsp://192.168.1.119:8554/unicast

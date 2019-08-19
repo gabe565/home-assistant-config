@@ -1,77 +1,37 @@
 google_assistant:
   entity_config:
-    light.garage_lights:
-      expose: true
-      aliases:
-        - Garage Lights
-      room: Front Yard
-    light.porch_lights:
-      expose: true
-      aliases:
-        - Porch Lights
-        - Front Porch Lights
-      room: Front Yard
-    light.side_yard_light:
-      expose: true
-      aliases:
-        - Side Yard Light
-      room: Side Yard
-
     switch.living_room_candle_warmer:
       expose: true
       aliases:
         - Candle Warmer
       room: Living Room
 
-    switch.master_bedroom_heater:
+    switch.master_bedroom_fireplace:
       expose: true
       aliases:
+        - Fireplace
         - Space Heater
         - Heater
       room: Master Bedroom
-    switch.master_bedroom_heated_blanket:
-      expose: true
-      aliases:
-        - Heated Blanket
-      room: Master Bedroom
+
+    # switch.master_bedroom_heated_blanket:
+    #   expose: true
+    #   aliases:
+    #     - Heated Blanket
+    #   room: Master Bedroom
 
 homeassistant:
   customize:
-    switch.master_bedroom_heater:
+    switch.master_bedroom_fireplace:
       icon: mdi:radiator
-    light.side_yard_light:
-      icon: mdi:door
-    light.porch_lights:
-      icon: mdi:ceiling-light
-    light.garage_lights:
-      icon: mdi:wall-sconce
-
-light:
-  - platform: switch
-    entity_id: switch.side_yard_light
-    name: Side Yard Light
-
-  - platform: switch
-    entity_id: switch.porch_lights
-    name: Porch Lights
-
-  - platform: switch
-    entity_id: switch.garage_lights
-    name: Garage Lights
-
-  - platform: group
-    entities:
-      - light.porch_lights
-      - light.garage_lights
-    name: Front Yard Light Group
 
 tplink:
-  discovery: true
-  # switch:
-  #   - host: 192.168.1.21
-  #   - host: 192.168.1.29
-  #   - host: 192.168.1.31
-  #   - host: 192.168.1.32
-  #   - host: 192.168.1.39
-  #   - host: 192.168.1.96
-  #   - host: 192.168.1.210
+  discovery: false
+  switch:
+    - host: 192.168.1.21
+    # - host: 192.168.1.29
+    # - host: 192.168.1.31
+    # - host: 192.168.1.32
+    - host: 192.168.1.39
+    - host: 192.168.1.96
+    # - host: 192.168.1.210

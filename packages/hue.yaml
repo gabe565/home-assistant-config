@@ -1,23 +1,18 @@
-circadian_lighting:
-
 homeassistant:
+  customize_glob:
+    light.*_lamp:
+      icon: mdi:lamp
+    light.living_room_indirect_light*:
+      icon: mdi:ceiling-light
+    light.living_room_ceiling_fan_light*:
+      icon: mdi:ceiling-light
+    light.living_room_tall_lamp*:
+      icon: mdi:floor-lamp
   customize:
     light.master_bathroom_toilet_light:
       icon: mdi:toilet
     light.master_bathroom_shower_light:
       icon: mdi:shower
-    light.master_bedroom_gabe_lamp:
-      icon: mdi:lamp
-    light.master_bedroom_liv_lamp:
-      icon: mdi:lamp
-    light.living_room_ceiling_fan_light:
-      icon: mdi:ceiling-light
-    light.living_room_tall_lamp:
-      icon: mdi:floor-lamp
-    light.living_room_small_lamp:
-      icon: mdi:lamp
-    light.living_room_square_lamp:
-      icon: mdi:lamp
 
 light:
   - platform: group
@@ -45,27 +40,27 @@ light:
     entities:
       - light.master_bedroom
     name: Master Bedroom Lamp Group
+  
+  - platform: group
+    entities:
+      - light.study
+    name: Study Lamp Group
 
 switch:
   - platform: circadian_lighting
     name: Living Room Lights
     disable_brightness_adjust: true
     lights_ct:
-      - light.living_room_tall_lamp_1
-      - light.living_room_tall_lamp_2
-      - light.living_room_tall_lamp_3
-      - light.living_room_ceiling_fan_light_1
-      - light.living_room_ceiling_fan_light_2
-      - light.living_room_ceiling_fan_light_3
-      - light.living_room_indirect_light_1
-      - light.living_room_indirect_light_2
-      - light.living_room_indirect_light_3
-      - light.living_room_square_lamp
-      - light.living_room_small_lamp
+      - light.living_room
 
   - platform: circadian_lighting
     name: Master Bedroom Lamps
     disable_brightness_adjust: true
     lights_ct:
-      - light.master_bedroom_gabe_lamp
-      - light.master_bedroom_liv_lamp
+      - light.master_bedroom
+
+  - platform: flux
+    disable_brightness_adjust: true
+    lights:
+      - light.living_room
+      - light.master_bedroom

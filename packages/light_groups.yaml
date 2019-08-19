@@ -1,20 +1,27 @@
 light:
   - platform: group
     entities:
-      - light.master_bedroom_ceiling_fan_light
-      - light.master_bedroom
-    name: Master Bedroom Light Group
-
-  - platform: group
-    entities:
       - light.kitchen
       - light.kitchen_main_lights
     name: Kitchen Light Group
 
   - platform: group
     entities:
+      - light.study_ceiling_fan_light
+      - light.study
+    name: Study Light Group
+
+  - platform: group
+    entities:
+      - light.master_bedroom_ceiling_fan_light
+      - light.master_bedroom
+    name: Master Bedroom Light Group
+
+  - platform: group
+    entities:
       - light.master_bathroom_vanity_lights
       - light.master_bathroom
+      - light.master_closet_lights
     name: Master Bathroom Light Group
 
   - platform: group
@@ -31,7 +38,7 @@ light:
       - light.laundry_room_main_lights
       - light.master_bathroom_vanity_lights
       - light.living_room
-      - light.living_room_square_lamp
+      - light.back_room_main_lights
       - light.master_bathroom
       - light.master_bedroom
       - light.master_bedroom_ceiling_fan_light

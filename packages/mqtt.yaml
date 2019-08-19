@@ -1,5 +1,7 @@
 mqtt:
-  broker: 127.0.0.1
+  broker: !secret mqtt_broker
+  port: 8883
+  certificate: auto
   discovery: true
   discovery_prefix: homeassistant
   username: !secret mqtt_user
