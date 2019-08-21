@@ -2,6 +2,11 @@ asuswrt:
   host: 192.168.1.1
   username: !secret asuswrt_user
   ssh_key: !secret asuswrt_ssh_key
+  sensors:
+    - download
+    - download_speed
+    - upload
+    - upload_speed
 
 device_tracker:
   - platform: asuswrt
