@@ -73,7 +73,7 @@ google_assistant:
     switch.driveway_lights:
       expose: true
       aliases:
-        - Lights
+        - Driveway Lights
       room: Driveway
 
     #############
@@ -82,7 +82,7 @@ google_assistant:
     switch.side_yard_light:
       expose: true
       aliases:
-        - Light
+        - Side Yard Light
       room: Side Yard
 
     ###############
@@ -91,7 +91,7 @@ google_assistant:
     switch.front_porch_lights:
       expose: true
       aliases:
-        - Lights
+        - Front Porch Lights
       room: Front Porch
 
     ###########
@@ -100,7 +100,7 @@ google_assistant:
     light.kitchen_main_lights: 
       expose: true
       aliases:
-        - Main Lights
+        - Kitchen Main Lights
       room: Kitchen
 
     #################
@@ -109,7 +109,7 @@ google_assistant:
     light.front_hallway_main_lights:
       expose: true
       aliases:
-        - Main Lights
+        - Front Hallway Lights
       room: Front Hallway
 
     #############
@@ -118,7 +118,7 @@ google_assistant:
     switch.back_room_main_lights:
       expose: true
       aliases:
-        - Main Lights
+        - Back Room Lights
         - Tortilla Room
       room: Back Room
 
@@ -128,8 +128,14 @@ google_assistant:
     light.hallway_main_lights: 
       expose: true
       aliases:
-        - Main Lights
+        - Hallway Lights
       room: Hallway
+    
+    light.front_bathroom_vanity_lights:
+      expose: true
+      aliases:
+        - Front Bathroom Lights
+      room: Front Bathroom
 
     ################
     # Laundry Room #
@@ -137,7 +143,7 @@ google_assistant:
     light.laundry_room_main_lights: 
       expose: true
       aliases:
-        - Main Lights
+        - Laundry Room Lights
       room: Laundry Room
 
     ##########
@@ -146,7 +152,7 @@ google_assistant:
     switch.garage_main_lights: 
       expose: true
       aliases:
-        - Main Lights
+        - Garage Lights
       room: Garage
 
     #########
@@ -155,11 +161,14 @@ google_assistant:
     light.study_ceiling_fan_light: 
       expose: true
       aliases:
+        - Study Ceiling Fan Light
         - Ceiling Fan Light
       room: Study
+
     fan.study_ceiling_fan:
       expose: true
       aliases:
+        - Study Ceiling Fan
         - Ceiling Fan
       room: Study
 
@@ -169,11 +178,14 @@ google_assistant:
     light.master_bedroom_ceiling_fan_light: 
       expose: true
       aliases:
+        - Master Bedroom Ceiling Fan Light
         - Ceiling Fan Light
       room: Master Bedroom
+
     fan.master_bedroom_ceiling_fan:
       expose: true
       aliases:
+        - Master Bedroom Ceiling Fan
         - Ceiling Fan
       room: Master Bedroom
 
@@ -183,10 +195,11 @@ google_assistant:
     light.master_bathroom_vanity_lights:
       expose: true
       aliases:
-        - Vanity Lights
+        - Master Bathroom Vanity Lights
       room: Master Bathroom
+
     light.master_closet_lights:
       expose: true
       aliases:
-        - Closet Lights
+        - Master Closet Lights
       room: Master Bathroom
