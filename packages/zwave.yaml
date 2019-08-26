@@ -1,3 +1,11 @@
+google_assistant:
+  entity_config:
+    lock.front_door:
+      expose: true
+      aliases:
+        - Front Door
+      room: Front Hallway
+
 zwave:
   usb_path: /dev/ttyACM0
   network_key: !secret zwave_network_key
