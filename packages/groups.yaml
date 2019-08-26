@@ -5,6 +5,11 @@ google_assistant:
       expose: true
       aliases:
         - Indoor Lights
+    
+    light.main_house_light_group:
+      expose: true
+      aliases:
+        - Main House Lights
 
 group:
 
@@ -84,8 +89,6 @@ group:
       # Other Lights
       - light.front_hallway_main_lights
       - light.kitchen_main_lights
-      - light.back_room_main_lights
-      - light.laundry_room_main_lights
       - light.hallway_main_lights
 
   indoor_lights:
@@ -103,6 +106,7 @@ group:
       - light.back_room_main_lights
       - light.laundry_room_main_lights
       - light.hallway_main_lights
+      - light.front_bathroom_vanity_lights
       - light.study_ceiling_fan_light
       - light.master_bedroom_ceiling_fan_light
       - light.master_bathroom_vanity_lights
