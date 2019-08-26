@@ -51,16 +51,10 @@ switch:
     name: Living Room Lights
     disable_brightness_adjust: true
     lights_ct:
-      - light.living_room
+      - group.living_room_lights
 
   - platform: circadian_lighting
     name: Master Bedroom Lamps
     disable_brightness_adjust: true
     lights_ct:
-      - light.master_bedroom
-
-  - platform: flux
-    disable_brightness_adjust: true
-    lights:
-      - light.living_room
-      - light.master_bedroom
+      - group.master_bedroom_lights
