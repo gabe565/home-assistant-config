@@ -1,34 +1,49 @@
+cch:
+  background: 'rgba(41,128,185,.5)'
+  header_css: 'backdrop-filter: blur(10px)'
+  hide_help: true
+  sidebar_closed: true
+  swipe: true
 resources:
   - type: module
-    url: /customcards/github/maykar/compact-custom-header.js?track=true
+    url: /community_plugin/compact-custom-header/compact-custom-header.js
   - type: js
-    url: /customcards/lovelace/auto-entities.js
+    url: /community_plugin/lovelace-auto-entities/auto-entities.js
   - type: js
-    url: /customcards/github/thomasloven/card-tools.js?track=true
+    url: /community_plugin/lovelace-card-tools/card-tools.js
   - type: js
-    url: /customcards/lovelace/slider-entity-row.js
+    url: /community_plugin/lovelace-slider-entity-row/slider-entity-row.js
   - type: js
-    url: /customcards/lovelace/fold-entity-row.js
+    url: /community_plugin/lovelace-fold-entity-row/fold-entity-row.js
   - type: js
-    url: /customcards/lovelace/vertical-stack-in-card.js
+    url: /community_plugin/vertical-stack-in-card/vertical-stack-in-card.js
   - type: module
-    url: /customcards/lovelace/mini-media-player-bundle.js
+    url: /community_plugin/mini-media-player/mini-media-player.js
   - type: module
-    url: /customcards/lovelace/mini-graph-card-bundle.js
-  - type: js
-    url: /customcards/github/custom-cards/tracker-card.js?track=true
+    url: /community_plugin/mini-graph-card/mini-graph-card.js
+  - type: module
+    url: /community_plugin/lovelace-markdown-mod/markdown-mod.js
+  - type: module
+    url: /community_plugin/simple-thermostat/simple-thermostat.js
+  - type: module
+    url: /community_plugin/popup-backdrop-filter/popup-backdrop-filter.js
 title: Home
 views:
-  - badges: []
+  - background: var(--background-image)
+    badges: []
     cards:
-      - type: 'custom:compact-custom-header'
-      - entity: climate.hallway
-        type: thermostat
+      - decimals: 0
+        entity: climate.hallway
+        sensors:
+          - entity: sensor.hallway_thermostat_humidity
+            name: Humidity
+        step_size: 1
+        type: 'custom:simple-thermostat'
       - color_thresholds:
           - color: '#EF5350'
             value: 260
           - color: '#FFF176'
-            value: 160
+            value: 190
           - color: '#2196F3'
             value: 80
           - color: '#EF5350'
@@ -49,12 +64,32 @@ views:
         source: icon
         type: 'custom:mini-media-player'
       - card:
+          title: People at Home
+          type: glance
+        filter:
+          include:
+            - entity_id: person.*
+              state: home
+        show_empty: false
+        type: 'custom:auto-entities'
+      - card:
+          show_header_toggle: false
+          title: Open Doors
+          type: glance
+        filter:
+          include:
+            - entity_id: binary_sensor.*_door
+              state: 'on'
+        show_empty: false
+        type: 'custom:auto-entities'
+      - card:
           show_header_toggle: false
           title: Media Players
           type: entities
         filter:
           exclude:
             - state: 'off'
+            - state: unavailable
             - entity_id: media_player.roku_*
               state: idle
             - entity_id: media_player.spotify
@@ -63,121 +98,119 @@ views:
               options:
                 group: true
                 type: 'custom:mini-media-player'
-                volume_stateless: true
-        type: 'custom:auto-entities'
-      - card:
-          title: People at Home
-          type: glance
-        filter:
-          include:
-            - entity_id: device_tracker.*
+                volume_stateless: false
         show_empty: false
         type: 'custom:auto-entities'
-      - entity: weather.dark_sky
-        type: weather-forecast
-      - entities:
-          - head:
-              entity: light.living_room_light_group
-              icon: 'mdi:sofa'
-              name: Lights
-              toggle: true
-              type: 'custom:slider-entity-row'
-            items:
-              - entity: light.living_room_ceiling_fan_light
-                name: Ceiling Fan Light
-                toggle: true
-                type: 'custom:slider-entity-row'
-              - entity: light.living_room_indirect_light
-                name: Indirect Light
-                toggle: true
-                type: 'custom:slider-entity-row'
-              - entity: light.living_room_tall_lamp
-                name: Tall Lamp
-                toggle: true
-                type: 'custom:slider-entity-row'
-              - entity: light.living_room_small_lamp
-                name: Small Lamp
-                toggle: true
-                type: 'custom:slider-entity-row'
-              - entity: light.living_room_square_lamp
-                name: Square Lamp
-                toggle: true
-                type: 'custom:slider-entity-row'
-            type: 'custom:fold-entity-row'
-          - entity: fan.living_room
-            name: Ceiling Fan
-            toggle: true
-            type: 'custom:slider-entity-row'
-          - entity: media_player.sony_bravia_tv
-            group: true
-            hide:
-              controls: true
-              info: true
-              power_state: false
-              source: true
-              volume: true
-            icon: 'mdi:television'
-            type: 'custom:mini-media-player'
-          - entity: switch.living_room_candle_warmer
-            icon: 'mdi:candle'
-            name: Candle Warmer
-          - binary_sensor.inner_back_door
-          - binary_sensor.outer_back_door
-        show_header_toggle: false
-        title: Living Room
-        type: entities
+      - cards:
+          - entities:
+              - head:
+                  entity: light.living_room
+                  icon: 'mdi:sofa'
+                  name: Lights
+                  toggle: true
+                  type: 'custom:slider-entity-row'
+                items:
+                  - entity: light.living_room_ceiling_fan_light
+                    name: Ceiling Fan Light
+                    toggle: true
+                    type: 'custom:slider-entity-row'
+                  - entity: light.living_room_indirect_light
+                    name: Indirect Light
+                    toggle: true
+                    type: 'custom:slider-entity-row'
+                  - entity: light.living_room_tall_lamp
+                    name: Tall Lamp
+                    toggle: true
+                    type: 'custom:slider-entity-row'
+                  - entity: light.living_room_small_lamp
+                    name: Small Lamp
+                    toggle: true
+                    type: 'custom:slider-entity-row'
+                  - entity: light.living_room_square_lamp
+                    name: Square Lamp
+                    toggle: true
+                    type: 'custom:slider-entity-row'
+                type: 'custom:fold-entity-row'
+            show_header_toggle: false
+            title: Living Room
+            type: entities
+          - columns: 3
+            entities:
+              - entity: switch.breath_of_the_wild_poster
+                icon: 'mdi:image-frame'
+                name: Poster
+                tap_action:
+                  action: toggle
+              - entity: switch.living_room_candle_warmer
+                icon: 'mdi:candle'
+                name: Candle Warmer
+                tap_action:
+                  action: toggle
+              - entity: media_player.sony_bravia_tv
+                icon: 'mdi:television'
+                name: TV
+                tap_action:
+                  action: toggle
+              - entity: light.back_room_main_lights
+                name: Back Room
+                tap_action:
+                  action: toggle
+              - binary_sensor.inner_back_door
+              - binary_sensor.outer_back_door
+            type: glance
+        type: 'custom:vertical-stack-in-card'
       - entities:
           - entity: light.hallway_main_lights
             name: Lights
             toggle: true
             type: 'custom:slider-entity-row'
-          - entity: climate.hallway
-            name: Thermostat
-          - entity: sensor.hallway_thermostat_humidity
-            name: Humidity
+          - entity: light.front_bathroom_vanity_lights
+            icon: 'mdi:shower'
+            name: Bathroom Lights
+            toggle: true
+            type: 'custom:slider-entity-row'
         show_header_toggle: false
         title: Hallway
         type: entities
-      - entities:
-          - entity: light.front_hallway_main_lights
-            name: Lights
-            toggle: true
-            type: 'custom:slider-entity-row'
-          - entity: binary_sensor.front_door
-        show_header_toggle: false
-        title: Front Hallway
-        type: entities
-      - entities:
-          - head:
-              entity: light.kitchen_light_group
-              name: Lights
-              toggle: true
-              type: 'custom:slider-entity-row'
-            items:
-              - entity: light.kitchen_main_lights
-                name: Main Lights
+      - cards:
+          - entities:
+              - entity: light.front_hallway_main_lights
+                name: Lights
                 toggle: true
                 type: 'custom:slider-entity-row'
-              - entity: light.kitchen_sink_light
-                name: Sink Light
-                toggle: true
-                type: 'custom:slider-entity-row'
-            type: 'custom:fold-entity-row'
-          - card:
-              head:
-                entity: sensor.coffee_maker_state
-              type: 'custom:fold-entity-row'
-            filter:
-              include:
-                - group: group.coffee_maker
-            type: 'custom:auto-entities'
-          - entity: scene.kitchen_run_lighting
-          - entity: media_player.kitchen_mini
-            group: true
-            type: 'custom:mini-media-player'
-        show_header_toggle: false
-        title: Kitchen
-        type: entities
+            show_header_toggle: false
+            title: Front Hallway
+            type: entities
+          - entities:
+              - entity: lock.front_door
+                name: Front Door Lock
+              - binary_sensor.front_door
+            type: glance
+        type: 'custom:vertical-stack-in-card'
+      - cards:
+          - entities:
+              - head:
+                  entity: light.kitchen_light_group
+                  name: Lights
+                  toggle: true
+                  type: 'custom:slider-entity-row'
+                items:
+                  - entity: light.kitchen_main_lights
+                    name: Main Lights
+                    toggle: true
+                    type: 'custom:slider-entity-row'
+                  - entity: light.kitchen_sink_light
+                    name: Sink Light
+                    toggle: true
+                    type: 'custom:slider-entity-row'
+                type: 'custom:fold-entity-row'
+            show_header_toggle: false
+            title: Kitchen
+            type: entities
+          - entities:
+              - sensor.coffee_maker_state
+            type: glance
+        type: 'custom:vertical-stack-in-card'
       - entities:
           - head:
               entity: light.master_bedroom_light_group
@@ -226,113 +259,162 @@ views:
                 name: Shower Light
                 toggle: true
                 type: 'custom:slider-entity-row'
+              - entity: light.master_closet_lights
+                icon: 'mdi:hanger'
+                name: Closet Lights
+                toggle: true
+                type: 'custom:slider-entity-row'
             type: 'custom:fold-entity-row'
           - entity: fan.master_bedroom_ceiling_fan
             name: Ceiling Fan
+            toggle: true
             type: 'custom:slider-entity-row'
-          - entity: switch.master_bedroom_heater
-            name: Space Heater
-          - entity: switch.master_bedroom_heated_blanket
-            name: Heated Blanket
+          - entity: switch.master_bedroom_fireplace
+            name: Fireplace
+          - entity: input_select.master_bedroom_relax_sounds
         show_header_toggle: false
         title: Master Bedroom
         type: entities
       - entities:
-          - entity: light.study_ceiling_fan_light
-            name: Ceiling Fan Light
+          - head:
+              entity: light.study_light_group
+              icon: 'mdi:keyboard'
+              name: Lights
+              toggle: true
+              type: 'custom:slider-entity-row'
+            items:
+              - entity: light.study_ceiling_fan_light
+                name: Ceiling Fan Light
+                toggle: true
+                type: 'custom:slider-entity-row'
+              - entity: light.study
+                name: Lamps
+                toggle: true
+                type: 'custom:slider-entity-row'
+            type: 'custom:fold-entity-row'
+          - entity: fan.study_ceiling_fan
+            name: Ceiling Fan
             toggle: true
             type: 'custom:slider-entity-row'
-          - entity: media_player.study_mini
-            group: true
-            type: 'custom:mini-media-player'
         show_header_toggle: false
         title: Study
         type: entities
-      - entities:
-          - head:
-              entity: light.front_yard_light_group
-              name: Front Yard Lights
-            items:
-              - entity: light.porch_lights
-              - entity: light.garage_lights
-            type: 'custom:fold-entity-row'
-          - entity: light.side_yard_light
-          - entity: binary_sensor.side_door
-        show_header_toggle: false
-        title: Outside
-        type: entities
-      - entities:
-          - entity: light.laundry_room_main_lights
-            icon: 'mdi:washing-machine'
-            name: Lights
-            toggle: true
-            type: 'custom:slider-entity-row'
-          - entity: binary_sensor.laundry_room_door
-          - card:
-              head:
-                entity: sensor.washer_state
-              type: 'custom:fold-entity-row'
-            filter:
-              include:
-                - group: group.washer
-            type: 'custom:auto-entities'
-        show_header_toggle: false
-        title: Laundry Room
-        type: entities
-      - image: >-
-          https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?station=TLX&brand=wui&num=12&delay=50&type=N0R&frame=0&scale=1&noclutter=0&showstorms=0&mapx=400&mapy=240&centerx=400&centery=240&transx=0&transy=0&showlabels=1&severe=0&rainsnow=1&lightning=0&smooth=0
-        type: picture
-    icon: 'mdi:home'
-    path: default_view
-    title: Home
-  - badges: []
-    cards:
-      - type: 'custom:compact-custom-header'
       - cards:
-          - entity: camera.roborock_map
-            name: House Map
-            show_name: false
-            show_state: false
-            type: picture-entity
           - entities:
-              - entity: vacuum.xiaomi_vacuum_cleaner
-            show_state: true
+              - entity: light.laundry_room_main_lights
+                name: Lights
+                toggle: true
+                type: 'custom:slider-entity-row'
+            show_header_toggle: false
+            title: Laundry Room
+            type: entities
+          - entities:
+              - sensor.washer_state
+              - binary_sensor.laundry_room_door
             type: glance
         type: 'custom:vertical-stack-in-card'
-    icon: 'mdi:robot-vacuum'
-    path: vacuum
-    title: Vacuum
-  - badges: []
-    cards:
-      - chevrons: false
-        clock_format: '12'
-        disable: false
-        main_config: true
-        type: 'custom:compact-custom-header'
       - entities:
-          - card:
-              head:
-                entity: switch.pihole_state
-              type: 'custom:fold-entity-row'
-            filter:
-              include:
-                - entity_id: sensor.pi_hole_*
-            type: 'custom:auto-entities'
-          - card:
-              head:
-                entity: switch.deluge_state
-              type: 'custom:fold-entity-row'
-            filter:
-              include:
-                - entity_id: sensor.deluge_*
-            type: 'custom:auto-entities'
-        show_header_toggle: false
-        type: entities
-      - title: null
-        trackers:
-          - sensor.custom_card_tracker
-          - sensor.custom_component_tracker
-        type: 'custom:tracker-card'
+          - entity: light.front_yard_light_group
+            name: Front Yard Lights
+            tap_action:
+              action: toggle
+          - entity: light.side_yard_light
+            tap_action:
+              action: toggle
+        show_icon: true
+        show_state: true
+        title: Outside
+        type: glance
+      - entities:
+          - entity: light.garage_main_lights
+            tap_action:
+              action: toggle
+          - entity: cover.garage_door
+          - entity: binary_sensor.side_door
+        title: Garage
+        type: glance
+    icon: 'mdi:home'
+    path: home
+    title: Home
+  - background: var(--background-image)
+    badges: []
+    cards:
+      - entity: weather.dark_sky
+        type: weather-forecast
+      - hold_action:
+          action: none
+        image: >-
+          https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?station=TLX&brand=wui&num=12&delay=50&type=N0R&frame=0&scale=1&noclutter=0&showstorms=0&mapx=400&mapy=240&centerx=400&centery=240&transx=0&transy=0&showlabels=1&severe=0&rainsnow=1&lightning=0&smooth=0
+        tap_action:
+          action: none
+        type: picture
+    icon: 'mdi:weather-partlycloudy'
+    path: weather
+    title: Weather
+  - background: var(--background-image)
+    badges: []
+    cards:
+      - cards:
+          - entity: camera.wyze
+            type: picture-entity
+          - entities:
+              - sensor.wyze_light_sensor
+              - switch.wyze_ir_filter
+              - switch.wyze_ir_led
+              - switch.wyze_night_mode
+              - switch.wyze_night_mode_auto
+              - switch.wyze_blue_led
+              - switch.wyze_yellow_led
+              - switch.wyze_motion_detection
+              - switch.wyze_motion_tracking
+              - camera.wyze_motion_snapshot
+              - binary_sensor.wyze_motion_sensor
+            type: entities
+        type: 'custom:vertical-stack-in-card'
+    icon: 'mdi:camera'
+    path: camera
+    title: Camera
+  - background: var(--background-image)
+    badges: []
+    cards:
+      - entity: switch.eccleston
+        hold_action:
+          action: more-info
+        icon_height: 48px
+        show_icon: true
+        show_name: true
+        tap_action:
+          action: toggle
+        type: entity-button
+      - card:
+          show_header_toggle: false
+          title: Router Stats
+          type: entities
+        filter:
+          include:
+            - entity_id: sensor.asuswrt_*
+        show_empty: false
+        type: 'custom:auto-entities'
+      - card:
+          show_header_toggle: false
+          title: PiHole Stats
+          type: entities
+        entities:
+          - switch.pihole_state
+        filter:
+          include:
+            - entity_id: sensor.pi_hole_*
+        type: 'custom:auto-entities'
+      - card:
+          show_header_toggle: false
+          title: Deluge Stats
+          type: entities
+        entities:
+          - switch.deluge_state
+        filter:
+          include:
+            - entity_id: sensor.deluge_*
+        type: 'custom:auto-entities'
     icon: 'mdi:dots-horizontal'
     panel: false
     path: other
