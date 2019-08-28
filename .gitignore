@@ -20,6 +20,7 @@ known_devices.yaml
 # Allow the following subfolders
 !packages
 !node-red
+!themes
 
 # Node-RED Flows
 !node-red/flows.json
