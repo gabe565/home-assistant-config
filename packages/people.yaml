@@ -10,7 +10,7 @@ homeassistant:
 person:
   - name: Gabe
     id: Gabe
-    user_id: 0d0e48cb4e9044c1956b5f3065aedf8b
+    user_id: !secret gabe_user_id
     device_trackers:
       - device_tracker.gabe_phone
       - device_tracker.gabe_car

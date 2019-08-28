@@ -1,9 +1,9 @@
 media_player:
   - platform: braviatv
-    host: 192.168.1.123
+    host: !secret media_player_bravia_host
 
   - platform: androidtv
-    host: 192.168.1.18
+    host: !secret media_player_shield_host
     name: "SHIELD"
     apps:
       "com.google.android.tvlauncher": Launcher
@@ -23,4 +23,4 @@ media_player:
 notify:
   - platform: nfandroidtv
     name: Living Room
-    host: 192.168.1.123
+    host: !secret media_player_bravia_host

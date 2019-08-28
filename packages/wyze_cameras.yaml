@@ -1,10 +1,10 @@
 camera:
   - platform: generic
     name: Wyze
-    username: root
-    password: ismart12
+    username: !secret wyze_camera_username
+    password: !secret wyze_camera_password
     authentication: basic
-    still_image_url: https://192.168.1.119/cgi-bin/currentpic.cgi
+    still_image_url: !secret wyze_camera_still_image_url
     verify_ssl: false
     scan_interval: 5
 

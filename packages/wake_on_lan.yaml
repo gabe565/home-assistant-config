@@ -5,7 +5,7 @@ homeassistant:
 
 switch:
   - platform: wake_on_lan
-    mac_address: d8:cb:8a:31:85:a4
+    mac_address: !secret eccleston_mac
     name: eccleston
-    host: 192.168.1.63
+    host: !secret eccleston_host
     scan_interval: 2
