@@ -65,7 +65,7 @@ scene:
 
   - name: Night
     entities:
-      group.main_house_lights: false
+      group.non_bedroom_lights: false
       group.study_lights: false
 
   - name: Kitchen Run Lighting

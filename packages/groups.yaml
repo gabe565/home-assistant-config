@@ -91,6 +91,23 @@ group:
       - light.kitchen_main_lights
       - light.hallway_main_lights
 
+  non_bedroom_lights:
+    entities:
+      # Hue Groups
+      - light.kitchen
+      - light.living_room
+      - light.study
+
+      # Other Lights
+      - light.front_hallway_main_lights
+      - light.kitchen_main_lights
+      - light.back_room_main_lights
+      - light.laundry_room_main_lights
+      - light.hallway_main_lights
+      - light.front_bathroom_vanity_lights
+      - light.study_ceiling_fan_light
+    name: Indoor Lights
+
   indoor_lights:
     entities:
       # Hue Groups
