@@ -9,7 +9,7 @@ homeassistant:
 
 person:
   - name: Gabe
-    id: Gabe
+    id: gabe
     user_id: !secret gabe_user_id
     device_trackers:
       - device_tracker.gabe_phone
