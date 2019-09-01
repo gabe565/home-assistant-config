@@ -21,6 +21,3 @@ known_devices.yaml
 !packages
 !node-red
 !themes
-
-# Node-RED Flows
-!node-red/flows.json
