@@ -3,7 +3,9 @@ cover:
     covers:
       garage_door:
         friendly_name: Garage Door
-        value_template: "{{ states('sensor.garage_door_sr04_distance')|float < 50 }}"
+        value_template: >
+          {{ (not is_state('sensor.garage_door_sr04_distance', 'unavailable'))
+            and states('sensor.garage_door_sr04_distance')|float < 50 }}
         open_cover:
           service: switch.turn_on
           data:
