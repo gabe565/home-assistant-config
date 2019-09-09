@@ -1,19 +1,23 @@
 cover:
-  - platform: template
-    covers:
-      garage_door:
-        device_class: garage
-        friendly_name: Garage Door
-        value_template: >
-          {{ (not is_state('sensor.garage_door_sr04_distance', 'unavailable')) and states('sensor.garage_door_sr04_distance')|float < 50 }}
-        open_cover:
-          service_template: "switch.turn_{{ 'off' if states('cover.garage_door') == 'open' else 'on' }}"
-          data:
-            entity_id: switch.garage_door
-        close_cover:
-          service_template: "switch.turn_{{ 'off' if states('cover.garage_door') == 'closed' else 'on' }}"
-          data:
-            entity_id: switch.garage_door
+  - platform: mqtt
+    command_topic: "garage_door/IN/STATE"
+    name:  Garage Door
+    payload_open: "open"
+    payload_close: "close"
+    state_topic: "garage_door/OUT/STATE"
+    state_open: "OPEN"
+    state_closed: "CLOSED"
+    availability_topic: "garage_door/OUT/STATUS"
+    device_class: garage
+
+sensor:
+  - platform: mqtt
+    name: Garage Door Distance
+    state_topic: garage_door/OUT/DIST
+    unit_of_measurement: cm
+    icon: mdi:ruler
+    expire_after: 60
+    availability_topic: "garage_door/OUT/STATUS"
 
 device_tracker:
   - platform: mqtt
