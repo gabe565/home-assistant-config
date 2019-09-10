@@ -10,17 +10,13 @@ homeassistant:
 person:
   - name: Gabe
     id: gabe
-    user_id: !secret gabe_user_id
-    device_trackers:
-      - device_tracker.gabe_phone
-      - device_tracker.gabe_car
+    user_id: !secret person_gabe_user_id
+    device_trackers: !secret person_gabe_device_trackers
 
   - name: Liv
     id: liv
-    device_trackers:
-      - device_tracker.liv_phone
+    device_trackers: !secret person_liv_device_trackers
   
   - name: Maya
     id: maya
-    device_trackers:
-      - device_tracker.maya_phone
+    device_trackers: !secret person_maya_device_trackers
