@@ -45,11 +45,6 @@ homeassistant:
     binary_sensor.outer_back_door:
       device_class: door
 
-vacuum:
-  - platform: xiaomi_miio
-    host: !secret xiaomi_vacuum_host
-    token: !secret xiaomi_vacuum_token
-
 xiaomi_aqara:
   discovery_retry: 10
   gateways:
