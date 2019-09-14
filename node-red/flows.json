@@ -942,7 +942,7 @@
         "output_location_type": "none",
         "mustacheAltTags": false,
         "x": 1230,
-        "y": 325,
+        "y": 350,
         "wires": [
             []
         ]
@@ -1019,7 +1019,8 @@
         "y": 325,
         "wires": [
             [
-                "8a70b2b2.a8444"
+                "8a70b2b2.a8444",
+                "6f88012c.a5f42"
             ]
         ]
     },
@@ -1280,7 +1281,7 @@
         "output_location_type": "none",
         "mustacheAltTags": false,
         "x": 1055,
-        "y": 475,
+        "y": 500,
         "wires": [
             []
         ]
@@ -1320,14 +1321,15 @@
         "type": "function",
         "z": "c9917d82.0f2bb",
         "name": "Pick Random Message",
-        "func": "let messages = [\n    \"Coffee's ready\",\n    'Coffee is done brewing.'\n]\nmsg.payload = messages[Math.floor(Math.random() * messages.length)]\nreturn msg;",
+        "func": "let messages = [\n    \"Coffee's ready.\",\n    'Coffee is done brewing.'\n]\nmsg.payload = messages[Math.floor(Math.random() * messages.length)]\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 835,
         "y": 475,
         "wires": [
             [
-                "4b55a81f.bc95f8"
+                "4b55a81f.bc95f8",
+                "5dba7e24.72498"
             ]
         ]
     },
@@ -4954,26 +4956,6 @@
         ]
     },
     {
-        "id": "c049a43f.ec5f78",
-        "type": "inject",
-        "z": "dcd2560.88883a8",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 225,
-        "y": 1200,
-        "wires": [
-            [
-                "9c411142.a31be"
-            ]
-        ]
-    },
-    {
         "id": "d2c86b48.c78ee8",
         "type": "server-events",
         "z": "96cd1986.8f4a98",
@@ -4986,6 +4968,50 @@
             [
                 "6699d8ce.89aab8"
             ]
+        ]
+    },
+    {
+        "id": "5dba7e24.72498",
+        "type": "api-call-service",
+        "z": "c9917d82.0f2bb",
+        "name": "HTML5 Notify",
+        "server": "dbd7e060.40c7f",
+        "version": 1,
+        "service_domain": "notify",
+        "service": "html5",
+        "entityId": "",
+        "data": "{\"title\":\"Coffee Maker\",\"message\":\"{{{ payload }}}\",\"data\":{\"priority\":\"high\",\"tag\":\"coffee-done\",\"renotify\":true}}",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 1055,
+        "y": 450,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6f88012c.a5f42",
+        "type": "api-call-service",
+        "z": "5d39e8a2.e45e18",
+        "name": "HTML5 Notify",
+        "server": "dbd7e060.40c7f",
+        "version": 1,
+        "service_domain": "notify",
+        "service": "html5",
+        "entityId": "",
+        "data": "{\"title\":\"Washer\",\"message\":\"{{{ payload }}}\",\"data\":{\"priority\":\"high\",\"tag\":\"washer-done\",\"renotify\":true}}",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 1230,
+        "y": 300,
+        "wires": [
+            []
         ]
     }
 ]
