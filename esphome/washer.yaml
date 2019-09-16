@@ -1,0 +1,8 @@
+substitutions:
+  entity_id: washer
+  device_name: Washer
+  api_password: !secret washer_api_password
+  ota_password: !secret washer_ota_password
+  relay_restore_mode: RESTORE_DEFAULT_ON
+
+<<: !include device_types/s31.yaml

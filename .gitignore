@@ -22,3 +22,4 @@ google_calendars.yaml
 !packages
 !node-red
 !themes
+!esphome

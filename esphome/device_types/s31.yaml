@@ -1,0 +1,42 @@
+esphome:
+  name: $entity_id
+  platform: ESP8266
+  board: esp01_1m
+
+uart:
+  rx_pin: RX
+  baud_rate: 4800
+
+switch:
+  - platform: gpio
+    name: $device_name
+    id: relay
+    pin: GPIO12
+    restore_mode: $relay_restore_mode
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: true
+    name: "${device_name} Button"
+    on_press:
+      - switch.toggle: relay
+
+status_led:
+  pin:
+    number: GPIO13
+    inverted: true
+
+sensor:
+  - platform: cse7766
+    update_interval: 5s
+    current:
+      name: "${device_name} Current"
+    voltage:
+      name: "${device_name} Voltage"
+    power:
+      name: "${device_name} Power"
+
+<<: !include common.yaml

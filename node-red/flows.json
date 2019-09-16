@@ -953,7 +953,7 @@
         "z": "5d39e8a2.e45e18",
         "name": "When Washer Wattage Changes",
         "server": "dbd7e060.40c7f",
-        "entityid": "sensor.washer_energy_power",
+        "entityid": "sensor.washer_power",
         "entityidfiltertype": "exact",
         "debugenabled": false,
         "constraints": [
@@ -1166,7 +1166,7 @@
         "z": "c9917d82.0f2bb",
         "name": "Coffee Maker State Changes",
         "server": "dbd7e060.40c7f",
-        "entityid": "sensor.coffee_maker_energy_power",
+        "entityid": "sensor.coffee_maker_power",
         "entityidfiltertype": "exact",
         "debugenabled": false,
         "constraints": [
