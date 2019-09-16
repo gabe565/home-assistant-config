@@ -9,9 +9,9 @@ uart:
 
 switch:
   - platform: gpio
+    pin: GPIO12
     name: $device_name
     id: relay
-    pin: GPIO12
     restore_mode: $relay_restore_mode
 
 binary_sensor:
@@ -21,6 +21,7 @@ binary_sensor:
       mode: INPUT_PULLUP
       inverted: true
     name: "${device_name} Button"
+    id: button
     internal: true
     on_press:
       - switch.toggle: relay
@@ -32,12 +33,12 @@ status_led:
 
 sensor:
   - platform: cse7766
-    update_interval: 5s
     current:
       name: "${device_name} Current"
-    voltage:
-      name: "${device_name} Voltage"
     power:
       name: "${device_name} Power"
+    voltage:
+      name: "${device_name} Voltage"
+    update_interval: 5s
 
 <<: !include common.yaml
