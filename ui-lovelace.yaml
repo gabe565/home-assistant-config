@@ -312,7 +312,8 @@ views:
             title: Laundry Room
             type: entities
           - entities:
-              - sensor.washer_state
+              - entity: sensor.washer_state
+                name: Washer
               - binary_sensor.laundry_room_door
             type: glance
         type: 'custom:vertical-stack-in-card'
