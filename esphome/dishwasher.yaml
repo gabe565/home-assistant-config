@@ -1,0 +1,8 @@
+substitutions:
+  entity_id: dishwasher
+  device_name: Dishwasher
+  api_password: !secret dishwasher_api_password
+  ota_password: !secret dishwasher_ota_password
+  relay_restore_mode: ALWAYS_ON
+
+<<: !include device_types/s31.yaml
