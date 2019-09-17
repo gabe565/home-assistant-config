@@ -1,0 +1,107 @@
+esphome:
+  name: $entity_id
+  platform: ESP8266
+  board: esp01_1m
+
+binary_sensor:
+  # Physical button
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+    name: "${device_name} Physical Button"
+    id: physical_button
+    internal: true
+    on_press:
+      - switch.turn_on: relay
+
+cover:
+  # Garage door cover
+  - platform: template
+    name: "${device_name}"
+    id: garage_door_cover
+    device_class: garage
+    open_action:
+      # Only run open_action if the door is CLOSED
+      - if:
+          condition:
+            lambda: 'return id(garage_door_cover).position == COVER_CLOSED;'
+          then:
+            - switch.turn_on: relay
+    close_action:
+      # Only run close_action if the door is OPEN
+      - if:
+          condition:
+            lambda: 'return id(garage_door_cover).position == COVER_OPEN;'
+          then:
+            - switch.turn_on: relay
+
+sensor:
+  # Ultrasonic distance sensor
+  - platform: ultrasonic
+    trigger_pin: GPIO12
+    echo_pin: GPIO14
+    name: "${device_name} Distance"
+    id: distance
+    update_interval: 2s
+    unit_of_measurement: cm
+    timeout: 3m
+    pulse_time: 20us
+    filters:
+      # Convert m to cm
+      - multiply: 100
+      # Aggressive filtering is needed until median filter is released
+      - exponential_moving_average:
+          alpha: 0.1
+          send_every: 3
+      - delta: 10
+    on_value_range:
+      # Garage door is OPEN if x < 30cm
+      - below: 30
+        then:
+          - cover.template.publish:
+              id: garage_door_cover
+              state: OPEN
+      # Garage door is CLOSED if x > 29cm
+      - above: 29
+        then:
+          - cover.template.publish:
+              id: garage_door_cover
+              state: CLOSED
+      # Car is not_home if  x > 139cm
+      - above: 139
+        then:
+          - homeassistant.service:
+              service: device_tracker.see
+              data:
+                dev_id: "${person}_car"
+                location_name: not_home
+      # Car is home if 49cm < x < 140cm
+      - above: 49
+        below: 140
+        then:
+          - homeassistant.service:
+              service: device_tracker.see
+              data:
+                dev_id: "${person}_car"
+                location_name: home
+
+status_led:
+  pin:
+    number: GPIO2
+    inverted: true
+
+switch:
+  # Garage door opener relay
+  - platform: gpio
+    pin: GPIO15
+    name: $device_name
+    id: relay
+    internal: true
+    restore_mode: ALWAYS_OFF
+    on_turn_on:
+      # Only pulse on for 500ms
+      - delay: 500ms
+      - switch.turn_off: relay
+
+<<: !include common.yaml

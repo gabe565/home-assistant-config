@@ -1,0 +1,8 @@
+substitutions:
+  entity_id: garage_door
+  device_name: Garage Door
+  api_password: !secret garage_door_api_password
+  ota_password: !secret garage_door_ota_password
+  person: gabe
+
+<<: !include device_types/opengarage.yaml

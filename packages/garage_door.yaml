@@ -1,29 +1,3 @@
-cover:
-  - platform: mqtt
-    command_topic: "garage_door/IN/STATE"
-    name:  Garage Door
-    payload_open: "open"
-    payload_close: "close"
-    state_topic: "garage_door/OUT/STATE"
-    state_open: "OPEN"
-    state_closed: "CLOSED"
-    availability_topic: "garage_door/OUT/STATUS"
-    device_class: garage
-
-sensor:
-  - platform: mqtt
-    name: Garage Door Distance
-    state_topic: garage_door/OUT/DIST
-    unit_of_measurement: cm
-    icon: mdi:ruler
-    expire_after: 60
-    availability_topic: "garage_door/OUT/STATUS"
-
-device_tracker:
-  - platform: mqtt
-    devices:
-      gabe_car: 'location/car/gabe'
-
 google_assistant:
   entity_config:
     cover.garage_door:
