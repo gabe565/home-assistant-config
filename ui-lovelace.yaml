@@ -18,7 +18,7 @@ resources:
   - type: js
     url: /community_plugin/vertical-stack-in-card/vertical-stack-in-card.js
   - type: module
-    url: /community_plugin/mini-media-player/mini-media-player.js
+    url: /community_plugin/mini-media-player/mini-media-player-bundle.js
   - type: module
     url: /community_plugin/mini-graph-card/mini-graph-card.js
   - type: module
