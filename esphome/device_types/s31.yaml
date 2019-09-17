@@ -35,10 +35,16 @@ sensor:
   - platform: cse7766
     current:
       name: "${device_name} Current"
+      filters:
+        - delta: 0.1
     power:
       name: "${device_name} Power"
+      filters:
+        - delta: 1
     voltage:
       name: "${device_name} Voltage"
+      filters:
+        - delta: 1
     update_interval: 5s
 
 <<: !include common.yaml
