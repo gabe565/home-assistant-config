@@ -208,7 +208,10 @@ views:
             title: Kitchen
             type: entities
           - entities:
-              - sensor.coffee_maker_state
+              - entity: sensor.coffee_maker_state
+                name: Coffee Maker
+              - entity: sensor.dishwasher_state
+                name: Dishwasher
             type: glance
         type: 'custom:vertical-stack-in-card'
       - entities:
