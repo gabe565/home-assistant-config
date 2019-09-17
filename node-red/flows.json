@@ -956,18 +956,7 @@
         "entityid": "sensor.washer_power",
         "entityidfiltertype": "exact",
         "debugenabled": false,
-        "constraints": [
-            {
-                "id": "r4okx4urvvd",
-                "targetType": "this_entity",
-                "targetValue": "",
-                "propertyType": "current_state",
-                "propertyValue": "new_state.state",
-                "comparatorType": "is_not",
-                "comparatorValueDatatype": "str",
-                "comparatorValue": "unavailable"
-            }
-        ],
+        "constraints": [],
         "constraintsmustmatch": "all",
         "outputs": 4,
         "customoutputs": [
@@ -993,7 +982,7 @@
             }
         ],
         "outputinitially": true,
-        "state_type": "str",
+        "state_type": "num",
         "x": 180,
         "y": 275,
         "wires": [
@@ -1169,18 +1158,7 @@
         "entityid": "sensor.coffee_maker_power",
         "entityidfiltertype": "exact",
         "debugenabled": false,
-        "constraints": [
-            {
-                "id": "ssku5gsgheg",
-                "targetType": "this_entity",
-                "targetValue": "",
-                "propertyType": "current_state",
-                "propertyValue": "new_state.state",
-                "comparatorType": "is_not",
-                "comparatorValueDatatype": "str",
-                "comparatorValue": "unavailable"
-            }
-        ],
+        "constraints": [],
         "constraintsmustmatch": "all",
         "outputs": 4,
         "customoutputs": [
@@ -1206,7 +1184,7 @@
             }
         ],
         "outputinitially": true,
-        "state_type": "str",
+        "state_type": "num",
         "x": 170,
         "y": 400,
         "wires": [
@@ -1216,7 +1194,7 @@
                 "de383de8.cf5cc"
             ],
             [
-                "652457b8.3c2458"
+                "d7a758a2.ab0278"
             ]
         ]
     },
@@ -1258,7 +1236,7 @@
         "output_location": "",
         "output_location_type": "none",
         "mustacheAltTags": false,
-        "x": 805,
+        "x": 1005,
         "y": 375,
         "wires": [
             []
@@ -1280,7 +1258,7 @@
         "output_location": "",
         "output_location_type": "none",
         "mustacheAltTags": false,
-        "x": 1055,
+        "x": 1255,
         "y": 500,
         "wires": [
             []
@@ -1305,7 +1283,7 @@
         "entity_location": "",
         "override_data": "none",
         "blockInputOverrides": false,
-        "x": 565,
+        "x": 765,
         "y": 425,
         "wires": [
             [
@@ -1324,7 +1302,7 @@
         "func": "let messages = [\n    \"Coffee's ready.\",\n    'Coffee is done brewing.'\n]\nmsg.payload = messages[Math.floor(Math.random() * messages.length)]\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 835,
+        "x": 1035,
         "y": 475,
         "wires": [
             [
@@ -1349,7 +1327,7 @@
         "output_location": "",
         "output_location_type": "none",
         "mustacheAltTags": false,
-        "x": 825,
+        "x": 1025,
         "y": 425,
         "wires": [
             []
@@ -4174,7 +4152,7 @@
         "entityLocationType": "none",
         "checkCurrentState": true,
         "blockInputOverrides": true,
-        "x": 385,
+        "x": 585,
         "y": 425,
         "wires": [
             [],
@@ -4626,12 +4604,8 @@
         "wires": [
             [],
             [],
-            [
-                "979fe493.ea6178"
-            ],
-            [
-                "979fe493.ea6178"
-            ]
+            [],
+            []
         ]
     },
     {
@@ -4997,7 +4971,7 @@
         "output_location": "",
         "output_location_type": "none",
         "mustacheAltTags": false,
-        "x": 1055,
+        "x": 1255,
         "y": 450,
         "wires": [
             []
@@ -5022,6 +4996,34 @@
         "x": 1230,
         "y": 300,
         "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d7a758a2.ab0278",
+        "type": "api-current-state",
+        "z": "c9917d82.0f2bb",
+        "name": "If State is Brewing",
+        "server": "dbd7e060.40c7f",
+        "version": 1,
+        "outputs": 2,
+        "halt_if": "Brewing",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "override_topic": false,
+        "entity_id": "sensor.coffee_maker_state",
+        "state_type": "str",
+        "state_location": "",
+        "override_payload": "none",
+        "entity_location": "",
+        "override_data": "none",
+        "blockInputOverrides": false,
+        "x": 415,
+        "y": 425,
+        "wires": [
+            [
+                "652457b8.3c2458"
+            ],
             []
         ]
     }
