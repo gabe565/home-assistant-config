@@ -5,6 +5,7 @@ wifi:
 
 # Enable logging
 logger:
+  level: INFO
   baud_rate: 0
 
 # Enable Home Assistant API
