@@ -415,6 +415,13 @@ views:
           include:
             - entity_id: sensor.deluge_*
         type: 'custom:auto-entities'
+      - entities:
+          - entity: sensor.home_to_work_travel_time
+            icon: 'mdi:briefcase'
+          - entity: sensor.work_to_home_travel_time
+            icon: 'mdi:home'
+        title: Travel Time
+        type: glance
     icon: 'mdi:dots-horizontal'
     panel: false
     path: other
