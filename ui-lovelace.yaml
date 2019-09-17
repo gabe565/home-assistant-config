@@ -352,7 +352,7 @@ views:
         tap_action:
           action: none
         type: picture
-    icon: 'mdi:weather-partlycloudy'
+    icon: 'mdi:weather-partly-cloudy'
     path: weather
     title: Weather
   - background: var(--background-image)
