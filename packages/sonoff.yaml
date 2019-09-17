@@ -1,0 +1,52 @@
+google_assistant:
+
+  entity_config:
+    switch.coffee_maker:
+      expose: true
+      aliases:
+        - Coffee Maker
+      room: Kitchen
+
+group:
+  coffee_maker:
+      name: Coffee Maker
+      entities:
+        - switch.coffee_maker
+        - sensor.coffee_maker_state
+        - sensor.coffee_maker_current
+        - sensor.coffee_maker_voltage
+        - sensor.coffee_maker_power
+
+  dishwasher:
+      name: Dishwasher
+      entities:
+        - switch.dishwasher
+        - sensor.dishwasher_state
+        - sensor.dishwasher_current
+        - sensor.dishwasher_voltage
+        - sensor.dishwasher_power
+
+  washer:
+      name: Washer
+      entities:
+        - switch.washer
+        - sensor.washer_state
+        - sensor.washer_current
+        - sensor.washer_voltage
+        - sensor.washer_power
+
+sensor:
+  - platform: mqtt
+    name: "Coffee Maker State"
+    state_topic: "hass/state/coffee"
+    icon: mdi:coffee
+
+  - platform: mqtt
+    name: "Dishwasher State"
+    state_topic: "hass/state/dishwasher"
+    icon: mdi:dishwasher
+
+  - platform: mqtt
+    name: "Washer State"
+    state_topic: "hass/state/washer"
+    icon: mdi:washing-machine

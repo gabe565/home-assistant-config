@@ -4141,7 +4141,7 @@
         "name": "",
         "server": "dbd7e060.40c7f",
         "outputs": 2,
-        "entityId": "sensor.coffee_maker_energy_power",
+        "entityId": "sensor.coffee_maker_power",
         "property": "state",
         "comparator": "gt",
         "value": "15",
@@ -4168,7 +4168,7 @@
         "name": "",
         "server": "dbd7e060.40c7f",
         "outputs": 2,
-        "entityId": "sensor.washer_energy_power",
+        "entityId": "sensor.washer_power",
         "property": "state",
         "comparator": "lte",
         "value": "8",
@@ -4667,7 +4667,7 @@
             "d6a0a9e.a1a7258"
         ],
         "x": 150,
-        "y": 625,
+        "y": 900,
         "wires": [
             [
                 "e73b2d86.1956b"
@@ -4691,7 +4691,7 @@
         "output_location_type": "none",
         "mustacheAltTags": false,
         "x": 360,
-        "y": 625,
+        "y": 900,
         "wires": [
             []
         ]
@@ -5024,6 +5024,271 @@
             [
                 "652457b8.3c2458"
             ],
+            []
+        ]
+    },
+    {
+        "id": "20c16be4.dc1ac4",
+        "type": "trigger-state",
+        "z": "c9917d82.0f2bb",
+        "name": "When Dishwasher Wattage Changes",
+        "server": "dbd7e060.40c7f",
+        "entityid": "sensor.dishwasher_power",
+        "entityidfiltertype": "exact",
+        "debugenabled": false,
+        "constraints": [],
+        "constraintsmustmatch": "all",
+        "outputs": 4,
+        "customoutputs": [
+            {
+                "outputId": "8zbk8qmw0g2",
+                "messageType": "default",
+                "messageValue": "",
+                "messageValueType": "json",
+                "comparatorPropertyType": "current_state",
+                "comparatorPropertyValue": "new_state.state",
+                "comparatorType": ">",
+                "comparatorValue": "8"
+            },
+            {
+                "outputId": "mwr7dmlwyun",
+                "messageType": "default",
+                "messageValue": "",
+                "messageValueType": "json",
+                "comparatorPropertyType": "current_state",
+                "comparatorPropertyValue": "new_state.state",
+                "comparatorType": "<=",
+                "comparatorValue": "8"
+            }
+        ],
+        "outputinitially": true,
+        "state_type": "num",
+        "x": 200,
+        "y": 650,
+        "wires": [
+            [],
+            [],
+            [
+                "5e69996b.b890a8"
+            ],
+            [
+                "f0ea1f1c.94bb8"
+            ]
+        ]
+    },
+    {
+        "id": "5e69996b.b890a8",
+        "type": "ha-wait-until",
+        "z": "c9917d82.0f2bb",
+        "name": "",
+        "server": "dbd7e060.40c7f",
+        "outputs": 2,
+        "entityId": "sensor.dishwasher_power",
+        "property": "state",
+        "comparator": "lte",
+        "value": "8",
+        "valueType": "num",
+        "timeout": "1",
+        "timeoutUnits": "minutes",
+        "entityLocation": "",
+        "entityLocationType": "none",
+        "checkCurrentState": true,
+        "blockInputOverrides": true,
+        "x": 460,
+        "y": 625,
+        "wires": [
+            [],
+            [
+                "6acfbf89.2e0d4"
+            ]
+        ]
+    },
+    {
+        "id": "f0ea1f1c.94bb8",
+        "type": "api-current-state",
+        "z": "c9917d82.0f2bb",
+        "name": "If State is Running",
+        "server": "dbd7e060.40c7f",
+        "version": 1,
+        "outputs": 2,
+        "halt_if": "Running",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "override_topic": false,
+        "entity_id": "sensor.dishwasher_state",
+        "state_type": "str",
+        "state_location": "",
+        "override_payload": "none",
+        "entity_location": "",
+        "override_data": "none",
+        "blockInputOverrides": false,
+        "x": 490,
+        "y": 675,
+        "wires": [
+            [
+                "d2e012f.0aab5f"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "6acfbf89.2e0d4",
+        "type": "api-call-service",
+        "z": "c9917d82.0f2bb",
+        "name": "Set State to Running",
+        "server": "dbd7e060.40c7f",
+        "version": 1,
+        "service_domain": "mqtt",
+        "service": "publish",
+        "entityId": "",
+        "data": "{\"topic\":\"hass/state/dishwasher\",\"payload\":\"Running\",\"retain\":\"true\"}",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 650,
+        "y": 625,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d2e012f.0aab5f",
+        "type": "ha-wait-until",
+        "z": "c9917d82.0f2bb",
+        "name": "",
+        "server": "dbd7e060.40c7f",
+        "outputs": 2,
+        "entityId": "sensor.dishwasher_power",
+        "property": "state",
+        "comparator": "gt",
+        "value": "8",
+        "valueType": "num",
+        "timeout": "3",
+        "timeoutUnits": "minutes",
+        "entityLocation": "",
+        "entityLocationType": "none",
+        "checkCurrentState": true,
+        "blockInputOverrides": true,
+        "x": 660,
+        "y": 675,
+        "wires": [
+            [],
+            [
+                "678f1a01.759f84"
+            ]
+        ]
+    },
+    {
+        "id": "678f1a01.759f84",
+        "type": "api-current-state",
+        "z": "c9917d82.0f2bb",
+        "name": "If State is Running",
+        "server": "dbd7e060.40c7f",
+        "version": 1,
+        "outputs": 2,
+        "halt_if": "Running",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "override_topic": false,
+        "entity_id": "sensor.dishwasher_state",
+        "state_type": "str",
+        "state_location": "",
+        "override_payload": "none",
+        "entity_location": "",
+        "override_data": "none",
+        "blockInputOverrides": false,
+        "x": 840,
+        "y": 675,
+        "wires": [
+            [
+                "fd7bef2f.b806a",
+                "1e9cc909.b245f7"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "fd7bef2f.b806a",
+        "type": "api-call-service",
+        "z": "c9917d82.0f2bb",
+        "name": "Set State to Idle",
+        "server": "dbd7e060.40c7f",
+        "version": 1,
+        "service_domain": "mqtt",
+        "service": "publish",
+        "entityId": "",
+        "data": "{\"topic\":\"hass/state/dishwasher\",\"payload\":\"Idle\",\"retain\":\"true\"}",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 1030,
+        "y": 650,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1e9cc909.b245f7",
+        "type": "function",
+        "z": "c9917d82.0f2bb",
+        "name": "Pick Random Message",
+        "func": "let messages = [\n    'The dishes is done.',\n    'Hey, the dishes is clean!'\n]\nmsg.payload = messages[Math.floor(Math.random() * messages.length)]\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1060,
+        "y": 700,
+        "wires": [
+            [
+                "e2b14a02.c98a58",
+                "126cb1dd.702d3e"
+            ]
+        ]
+    },
+    {
+        "id": "e2b14a02.c98a58",
+        "type": "api-call-service",
+        "z": "c9917d82.0f2bb",
+        "name": "Say The Thing",
+        "server": "dbd7e060.40c7f",
+        "version": 1,
+        "service_domain": "rest_command",
+        "service": "assistant_relay",
+        "entityId": "",
+        "data": "{\"message\":\"{{{ payload }}}\",\"broadcast\":true}",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 1280,
+        "y": 725,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "126cb1dd.702d3e",
+        "type": "api-call-service",
+        "z": "c9917d82.0f2bb",
+        "name": "HTML5 Notify",
+        "server": "dbd7e060.40c7f",
+        "version": 1,
+        "service_domain": "notify",
+        "service": "html5",
+        "entityId": "",
+        "data": "{\"title\":\"Dishwasher\",\"message\":\"{{{ payload }}}\",\"data\":{\"priority\":\"high\",\"tag\":\"dishwasher-done\",\"renotify\":true}}",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 1280,
+        "y": 675,
+        "wires": [
             []
         ]
     }
