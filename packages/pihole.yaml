@@ -11,16 +11,8 @@ homeassistant:
     switch.pihole_state:
       icon: mdi:cancel
 
-sensor:
-  - platform: pi_hole
+pi_hole:
     host: !secret pihole_host
-    monitored_conditions:
-      - ads_blocked_today
-      - ads_percentage_today
-      - dns_queries_today
-      - queries_cached
-      - unique_clients
-      - unique_domains
 
 switch:
   - platform: command_line
