@@ -1,3 +1,9 @@
+group:
+  all_people:
+    - person.gabe
+    - person.liv
+    - person.maya
+
 homeassistant:
   customize:
     person.gabe:
