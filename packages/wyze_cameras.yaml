@@ -1,13 +1,4 @@
 camera:
-  - platform: generic
+  - platform: ffmpeg
     name: Wyze
-    username: !secret wyze_camera_username
-    password: !secret wyze_camera_password
-    authentication: basic
-    still_image_url: !secret wyze_camera_still_image_url
-    verify_ssl: false
-    scan_interval: 5
-
-  # - platform: ffmpeg
-  #   name: Wyze
-  #   input: -rtsp_transport tcp -i rtsp://192.168.1.119:8554/unicast
+    input: !secret wyze_camera_rtsp_input
