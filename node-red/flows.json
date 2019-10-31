@@ -379,7 +379,7 @@
         "version": 1,
         "service_domain": "light",
         "service": "turn_on",
-        "entityId": "light.master_bedroom",
+        "entityId": "light.master_bedroom_lamp_group",
         "data": "{\"brightness\":255,\"transition\":2,\"kelvin\":\"{{ kelvin }}\"}",
         "dataType": "json",
         "mergecontext": "",
@@ -398,10 +398,10 @@
         "z": "d736294e.f02228",
         "name": "Turn Off Lamp Group",
         "server": "dbd7e060.40c7f",
-        "version": "1",
+        "version": 1,
         "service_domain": "homeassistant",
         "service": "turn_off",
-        "entityId": "light.master_bedroom",
+        "entityId": "light.master_bedroom_lamp_group",
         "data": "{\"transition\":2}",
         "dataType": "json",
         "mergecontext": "",
@@ -669,95 +669,6 @@
         ]
     },
     {
-        "id": "f9944a12.e1f308",
-        "type": "switch",
-        "z": "d736294e.f02228",
-        "name": "",
-        "property": "payload.entity_id",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "regex",
-                "v": "^binary_sensor.wall_switch_left",
-                "vt": "str",
-                "case": false
-            },
-            {
-                "t": "regex",
-                "v": "^binary_sensor.wall_switch_both",
-                "vt": "str",
-                "case": false
-            },
-            {
-                "t": "regex",
-                "v": "^binary_sensor.wall_switch_right",
-                "vt": "str",
-                "case": false
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 3,
-        "x": 225,
-        "y": 1075,
-        "wires": [
-            [
-                "56e36b4c.012a54"
-            ],
-            [
-                "56e36b4c.012a54",
-                "35df2336.1acc5c"
-            ],
-            [
-                "35df2336.1acc5c"
-            ]
-        ]
-    },
-    {
-        "id": "56e36b4c.012a54",
-        "type": "api-call-service",
-        "z": "d736294e.f02228",
-        "name": "Toggle Liv Lamp",
-        "server": "dbd7e060.40c7f",
-        "version": "1",
-        "service_domain": "homeassistant",
-        "service": "toggle",
-        "entityId": "light.master_bedroom_liv_lamp",
-        "data": "",
-        "dataType": "json",
-        "mergecontext": "",
-        "output_location": "",
-        "output_location_type": "none",
-        "mustacheAltTags": false,
-        "x": 405,
-        "y": 1025,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "35df2336.1acc5c",
-        "type": "api-call-service",
-        "z": "d736294e.f02228",
-        "name": "Toggle Gabe Lamp",
-        "server": "dbd7e060.40c7f",
-        "version": "1",
-        "service_domain": "homeassistant",
-        "service": "toggle",
-        "entityId": "light.master_bedroom_gabe_lamp",
-        "data": "",
-        "dataType": "json",
-        "mergecontext": "",
-        "output_location": "",
-        "output_location_type": "none",
-        "mustacheAltTags": false,
-        "x": 415,
-        "y": 1125,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "94e6539a.7d548",
         "type": "api-call-service",
         "z": "d736294e.f02228",
@@ -785,7 +696,7 @@
         "z": "ce20f928.4bec78",
         "name": "Match Lamps to Light",
         "server": "dbd7e060.40c7f",
-        "version": "1",
+        "version": 1,
         "service_domain": "homeassistant",
         "service": "turn_on",
         "entityId": "light.master_bedroom_lamp_group",
@@ -1423,7 +1334,7 @@
         "z": "2df69a17.a6a286",
         "name": "Nobody Home",
         "server": "dbd7e060.40c7f",
-        "entityid": "group.all_devices",
+        "entityid": "group.all_people",
         "entityidfiltertype": "exact",
         "debugenabled": false,
         "constraints": [
@@ -1577,11 +1488,11 @@
         "id": "845e662a.4c8448",
         "type": "trigger-state",
         "z": "d736294e.f02228",
-        "name": "Master Bedroom Pico",
+        "name": "Master Bedroom Wall Pico",
         "server": "dbd7e060.40c7f",
-        "entityid": "sensor.master_bedroom_pico",
+        "entityid": "sensor.master_bedroom_wall_pico",
         "entityidfiltertype": "exact",
-        "debugenabled": false,
+        "debugenabled": true,
         "constraints": [],
         "constraintsmustmatch": "all",
         "outputs": 7,
@@ -1634,7 +1545,7 @@
         ],
         "outputinitially": false,
         "state_type": "str",
-        "x": 125,
+        "x": 145,
         "y": 175,
         "wires": [
             [],
@@ -1998,18 +1909,18 @@
         "z": "d736294e.f02228",
         "name": "Match Brightness on Lamps",
         "server": "dbd7e060.40c7f",
-        "version": "1",
+        "version": 1,
         "service_domain": "homeassistant",
         "service": "turn_on",
-        "entityId": "light.master_bedroom",
+        "entityId": "light.master_bedroom_lamp_group",
         "data": "{\"brightness\":\"{{ data.event.new_state.attributes.brightness }}\",\"kelvin\":\"{{ kelvin }}\"}",
         "dataType": "json",
         "mergecontext": "",
         "output_location": "payload",
         "output_location_type": "msg",
         "mustacheAltTags": false,
-        "x": 720,
-        "y": 1440,
+        "x": 970,
+        "y": 1425,
         "wires": [
             []
         ]
@@ -2020,18 +1931,18 @@
         "z": "d736294e.f02228",
         "name": "Turn Off Lamps",
         "server": "dbd7e060.40c7f",
-        "version": "1",
+        "version": 1,
         "service_domain": "homeassistant",
         "service": "turn_off",
-        "entityId": "light.master_bedroom",
+        "entityId": "light.master_bedroom_lamp_group",
         "data": "",
         "dataType": "json",
         "mergecontext": "",
         "output_location": "",
         "output_location_type": "none",
         "mustacheAltTags": false,
-        "x": 502,
-        "y": 1494,
+        "x": 752,
+        "y": 1504,
         "wires": [
             []
         ]
@@ -2366,7 +2277,7 @@
             {
                 "name": "light",
                 "type": "str",
-                "value": "light.living_room"
+                "value": "light.living_room_light_group"
             }
         ],
         "x": 439,
@@ -2384,7 +2295,7 @@
             {
                 "name": "light",
                 "type": "str",
-                "value": "light.living_room"
+                "value": "light.living_room_light_group"
             }
         ],
         "x": 439,
@@ -2795,7 +2706,7 @@
         "server": "dbd7e060.40c7f",
         "entityid": "light.master_bedroom_ceiling_fan_light",
         "entityidfiltertype": "exact",
-        "debugenabled": false,
+        "debugenabled": true,
         "constraints": [
             {
                 "id": "1ceb7plzybi",
@@ -2812,7 +2723,7 @@
         "outputs": 4,
         "customoutputs": [
             {
-                "outputId": "i1q9x5vczlk",
+                "outputId": "d6wlxcgv744",
                 "messageType": "default",
                 "messageValue": "",
                 "messageValueType": "json",
@@ -2822,7 +2733,7 @@
                 "comparatorValue": "on"
             },
             {
-                "outputId": "z3wlpif97q",
+                "outputId": "q253fvqtxzb",
                 "messageType": "default",
                 "messageValue": "",
                 "messageValueType": "json",
@@ -2834,8 +2745,8 @@
         ],
         "outputinitially": false,
         "state_type": "str",
-        "x": 212,
-        "y": 1454,
+        "x": 475,
+        "y": 1450,
         "wires": [
             [],
             [],
@@ -2913,11 +2824,11 @@
         "z": "929b77d6.89d318",
         "name": "Match Brightness on Lamps",
         "server": "dbd7e060.40c7f",
-        "version": "1",
+        "version": 1,
         "service_domain": "homeassistant",
         "service": "turn_on",
-        "entityId": "light.study",
-        "data": "{\"brightness\":\"255\",\"kelvin\":\"{{ kelvin }}\",\"transition\":5}",
+        "entityId": "light.study_lamp_group",
+        "data": "{\"brightness\":\"255\",\"kelvin\":\"{{ kelvin }}\"}",
         "dataType": "json",
         "mergecontext": "",
         "output_location": "payload",
@@ -2935,11 +2846,11 @@
         "z": "929b77d6.89d318",
         "name": "Turn Off Lamps",
         "server": "dbd7e060.40c7f",
-        "version": "1",
+        "version": 1,
         "service_domain": "homeassistant",
         "service": "turn_off",
-        "entityId": "light.study",
-        "data": "{\"transition\":5}",
+        "entityId": "light.study_lamp_group",
+        "data": "",
         "dataType": "json",
         "mergecontext": "",
         "output_location": "",
@@ -2957,7 +2868,7 @@
         "z": "929b77d6.89d318",
         "name": "When Ceiling Fan Light State Changes",
         "server": "dbd7e060.40c7f",
-        "entityid": "switch.eccleston",
+        "entityid": "light.study_ceiling_fan_light",
         "entityidfiltertype": "exact",
         "debugenabled": false,
         "constraints": [],
@@ -3048,8 +2959,8 @@
         "type": "subflow:851a8282.3df38",
         "z": "d736294e.f02228",
         "name": "",
-        "x": 490,
-        "y": 1440,
+        "x": 740,
+        "y": 1425,
         "wires": [
             [
                 "2c77e326.d49eec"
@@ -3072,36 +2983,11 @@
         "output_location": "",
         "output_location_type": "none",
         "mustacheAltTags": false,
-        "x": 455,
-        "y": 625,
+        "x": 405,
+        "y": 600,
         "wires": [
             [
                 "8823058.703f3f8"
-            ]
-        ]
-    },
-    {
-        "id": "b2125fa.01a99a",
-        "type": "switch",
-        "z": "dcd2560.88883a8",
-        "name": "Check entity_id",
-        "property": "payload.entity_id",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "binary_sensor.motion_sensor_158d00022782fc",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 255,
-        "y": 625,
-        "wires": [
-            [
-                "d2029e7e.8c041"
             ]
         ]
     },
@@ -3119,11 +3005,11 @@
         "reset": "off",
         "bytopic": "all",
         "name": "",
-        "x": 645,
-        "y": 625,
+        "x": 595,
+        "y": 600,
         "wires": [
             [
-                "a331c4a5.8e4918"
+                "b0111ab1.9861a8"
             ]
         ]
     },
@@ -3143,8 +3029,8 @@
         "output_location": "",
         "output_location_type": "none",
         "mustacheAltTags": false,
-        "x": 850,
-        "y": 625,
+        "x": 950,
+        "y": 600,
         "wires": [
             []
         ]
@@ -3164,9 +3050,7 @@
         "x": 172,
         "y": 100,
         "wires": [
-            [
-                "fa50874a.39b278"
-            ]
+            []
         ]
     },
     {
@@ -3520,22 +3404,6 @@
         "x": 365,
         "y": 650,
         "wires": []
-    },
-    {
-        "id": "dab6541d.00da68",
-        "type": "link in",
-        "z": "d736294e.f02228",
-        "name": "",
-        "links": [
-            "7647eb2a.f4cb24"
-        ],
-        "x": 140,
-        "y": 1075,
-        "wires": [
-            [
-                "f9944a12.e1f308"
-            ]
-        ]
     },
     {
         "id": "7850749f.dc9acc",
@@ -3912,7 +3780,7 @@
         "z": "a7dd54ef.2d2f48",
         "name": "When the Inner/Outer Back Door Opens",
         "server": "dbd7e060.40c7f",
-        "entityid": "^binary_sensor.(inner|outer)_back_door$",
+        "entityid": "^binary_sensor.(inner|outer)_back_door_contact$",
         "entityidfiltertype": "regex",
         "debugenabled": false,
         "constraints": [
@@ -3932,6 +3800,16 @@
                 "targetValue": "light.back_room_main_lights",
                 "propertyType": "current_state",
                 "propertyValue": "new_state.state",
+                "comparatorType": "is",
+                "comparatorValueDatatype": "str",
+                "comparatorValue": "off"
+            },
+            {
+                "id": "4ptn2xafw9",
+                "targetType": "this_entity",
+                "targetValue": "",
+                "propertyType": "previous_state",
+                "propertyValue": "old_state.state",
                 "comparatorType": "is",
                 "comparatorValueDatatype": "str",
                 "comparatorValue": "off"
@@ -3969,7 +3847,7 @@
         "z": "a7dd54ef.2d2f48",
         "name": "When the Front Door Opens",
         "server": "dbd7e060.40c7f",
-        "entityid": "binary_sensor.front_door",
+        "entityid": "binary_sensor.front_door_contact",
         "entityidfiltertype": "exact",
         "debugenabled": false,
         "constraints": [
@@ -3989,6 +3867,16 @@
                 "targetValue": "light.front_hallway_main_lights",
                 "propertyType": "current_state",
                 "propertyValue": "new_state.state",
+                "comparatorType": "is",
+                "comparatorValueDatatype": "str",
+                "comparatorValue": "off"
+            },
+            {
+                "id": "t8y0ky2gyc",
+                "targetType": "this_entity",
+                "targetValue": "",
+                "propertyType": "previous_state",
+                "propertyValue": "old_state.state",
                 "comparatorType": "is",
                 "comparatorValueDatatype": "str",
                 "comparatorValue": "off"
@@ -4026,7 +3914,7 @@
         "z": "5d39e8a2.e45e18",
         "name": "When the Laundry Room Door Opens",
         "server": "dbd7e060.40c7f",
-        "entityid": "binary_sensor.laundry_room_door",
+        "entityid": "binary_sensor.laundry_room_door_contact",
         "entityidfiltertype": "regex",
         "debugenabled": false,
         "constraints": [
@@ -4046,6 +3934,16 @@
                 "targetValue": "light.laundry_room_main_lights",
                 "propertyType": "current_state",
                 "propertyValue": "new_state.state",
+                "comparatorType": "is",
+                "comparatorValueDatatype": "str",
+                "comparatorValue": "off"
+            },
+            {
+                "id": "00dt7401isflr",
+                "targetType": "this_entity",
+                "targetValue": "",
+                "propertyType": "previous_state",
+                "propertyValue": "old_state.state",
                 "comparatorType": "is",
                 "comparatorValueDatatype": "str",
                 "comparatorValue": "off"
@@ -4083,7 +3981,7 @@
         "z": "dcd2560.88883a8",
         "name": "When the Side Door Opens",
         "server": "dbd7e060.40c7f",
-        "entityid": "binary_sensor.side_door",
+        "entityid": "binary_sensor.side_door_contact",
         "entityidfiltertype": "regex",
         "debugenabled": false,
         "constraints": [
@@ -4392,22 +4290,6 @@
         "wires": []
     },
     {
-        "id": "46dde9fb.810b88",
-        "type": "link in",
-        "z": "dcd2560.88883a8",
-        "name": "",
-        "links": [
-            "7526557f.eff86c"
-        ],
-        "x": 115,
-        "y": 625,
-        "wires": [
-            [
-                "b2125fa.01a99a"
-            ]
-        ]
-    },
-    {
         "id": "1bd4b671.c2f67a",
         "type": "server-state-changed",
         "z": "d736294e.f02228",
@@ -4604,8 +4486,12 @@
         "wires": [
             [],
             [],
-            [],
-            []
+            [
+                "979fe493.ea6178"
+            ],
+            [
+                "979fe493.ea6178"
+            ]
         ]
     },
     {
@@ -4669,9 +4555,7 @@
         "x": 150,
         "y": 900,
         "wires": [
-            [
-                "e73b2d86.1956b"
-            ]
+            []
         ]
     },
     {
@@ -5041,24 +4925,24 @@
         "outputs": 4,
         "customoutputs": [
             {
-                "outputId": "8zbk8qmw0g2",
+                "outputId": "iyqsjvl07a",
                 "messageType": "default",
                 "messageValue": "",
                 "messageValueType": "json",
                 "comparatorPropertyType": "current_state",
                 "comparatorPropertyValue": "new_state.state",
                 "comparatorType": ">",
-                "comparatorValue": "8"
+                "comparatorValue": "4"
             },
             {
-                "outputId": "mwr7dmlwyun",
+                "outputId": "jvla43racvb",
                 "messageType": "default",
                 "messageValue": "",
                 "messageValueType": "json",
                 "comparatorPropertyType": "current_state",
                 "comparatorPropertyValue": "new_state.state",
                 "comparatorType": "<=",
-                "comparatorValue": "8"
+                "comparatorValue": "4"
             }
         ],
         "outputinitially": true,
@@ -5086,7 +4970,7 @@
         "entityId": "sensor.dishwasher_power",
         "property": "state",
         "comparator": "lte",
-        "value": "8",
+        "value": "4",
         "valueType": "num",
         "timeout": "1",
         "timeoutUnits": "minutes",
@@ -5163,9 +5047,9 @@
         "entityId": "sensor.dishwasher_power",
         "property": "state",
         "comparator": "gt",
-        "value": "8",
+        "value": "4",
         "valueType": "num",
-        "timeout": "3",
+        "timeout": "5",
         "timeoutUnits": "minutes",
         "entityLocation": "",
         "entityLocationType": "none",
@@ -5216,6 +5100,7 @@
         "name": "Set State to Idle",
         "server": "dbd7e060.40c7f",
         "version": 1,
+        "debugenabled": false,
         "service_domain": "mqtt",
         "service": "publish",
         "entityId": "",
@@ -5236,7 +5121,7 @@
         "type": "function",
         "z": "c9917d82.0f2bb",
         "name": "Pick Random Message",
-        "func": "let messages = [\n    'The dishes is done.',\n    'Hey, the dishes is clean!'\n]\nmsg.payload = messages[Math.floor(Math.random() * messages.length)]\nreturn msg;",
+        "func": "let messages = [\n    'The dishes is done.',\n    'The dishes be done.',\n    'Hey, the dishes is clean!'\n]\nmsg.payload = messages[Math.floor(Math.random() * messages.length)]\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 1060,
@@ -5290,6 +5175,387 @@
         "y": 675,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "e3a18494.b186e8",
+        "type": "trigger-state",
+        "z": "d736294e.f02228",
+        "name": "Master Bedroom Button Click",
+        "server": "dbd7e060.40c7f",
+        "entityid": "sensor.master_bedroom_.*_button_click",
+        "entityidfiltertype": "regex",
+        "debugenabled": false,
+        "constraints": [
+            {
+                "id": "1vchtkuu6fh",
+                "targetType": "this_entity",
+                "targetValue": "",
+                "propertyType": "previous_state",
+                "propertyValue": "old_state.state",
+                "comparatorType": "is",
+                "comparatorValueDatatype": "str",
+                "comparatorValue": ""
+            }
+        ],
+        "constraintsmustmatch": "all",
+        "outputs": 5,
+        "customoutputs": [
+            {
+                "outputId": "7xhvrcwe1sh",
+                "messageType": "default",
+                "messageValue": "",
+                "messageValueType": "json",
+                "comparatorPropertyType": "current_state",
+                "comparatorPropertyValue": "new_state.state",
+                "comparatorType": "is",
+                "comparatorValue": "left"
+            },
+            {
+                "outputId": "2c67tbr44py",
+                "messageType": "default",
+                "messageValue": "",
+                "messageValueType": "json",
+                "comparatorPropertyType": "current_state",
+                "comparatorPropertyValue": "new_state.state",
+                "comparatorType": "is",
+                "comparatorValue": "both"
+            },
+            {
+                "outputId": "aolf91fqfjo",
+                "messageType": "default",
+                "messageValue": "",
+                "messageValueType": "json",
+                "comparatorPropertyType": "current_state",
+                "comparatorPropertyValue": "new_state.state",
+                "comparatorType": "is",
+                "comparatorValue": "right"
+            }
+        ],
+        "outputinitially": false,
+        "state_type": "str",
+        "x": 180,
+        "y": 1050,
+        "wires": [
+            [],
+            [],
+            [
+                "b579de3.b7f8a2"
+            ],
+            [
+                "b579de3.b7f8a2",
+                "a6c1547c.5b5cb8"
+            ],
+            [
+                "a6c1547c.5b5cb8"
+            ]
+        ]
+    },
+    {
+        "id": "315c8684.b3bf8a",
+        "type": "trigger-state",
+        "z": "dcd2560.88883a8",
+        "name": "Occupancy Detected",
+        "server": "dbd7e060.40c7f",
+        "entityid": "binary_sensor.garage_occupancy",
+        "entityidfiltertype": "exact",
+        "debugenabled": false,
+        "constraints": [
+            {
+                "id": "2mhozik07c8",
+                "targetType": "this_entity",
+                "targetValue": "",
+                "propertyType": "current_state",
+                "propertyValue": "new_state.state",
+                "comparatorType": "is",
+                "comparatorValueDatatype": "str",
+                "comparatorValue": "on"
+            }
+        ],
+        "constraintsmustmatch": "all",
+        "outputs": 2,
+        "customoutputs": [],
+        "outputinitially": false,
+        "state_type": "str",
+        "x": 175,
+        "y": 600,
+        "wires": [
+            [
+                "d2029e7e.8c041"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "b0111ab1.9861a8",
+        "type": "ha-wait-until",
+        "z": "dcd2560.88883a8",
+        "name": "",
+        "server": "dbd7e060.40c7f",
+        "outputs": 1,
+        "entityId": "binary_sensor.garage_occupancy",
+        "property": "state",
+        "comparator": "is",
+        "value": "off",
+        "valueType": "str",
+        "timeout": 0,
+        "timeoutUnits": "seconds",
+        "entityLocation": "",
+        "entityLocationType": "none",
+        "checkCurrentState": true,
+        "blockInputOverrides": true,
+        "x": 760,
+        "y": 600,
+        "wires": [
+            [
+                "a331c4a5.8e4918"
+            ]
+        ]
+    },
+    {
+        "id": "56e36b4c.012a54",
+        "type": "api-call-service",
+        "z": "d736294e.f02228",
+        "name": "Turn On Liv Lamp",
+        "server": "dbd7e060.40c7f",
+        "version": 1,
+        "service_domain": "light",
+        "service": "turn_on",
+        "entityId": "light.master_bedroom_liv_lamp",
+        "data": "{\"kelvin\":\"{{ kelvin }}\"}",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 865,
+        "y": 1025,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bc41cc4b.ac9a3",
+        "type": "subflow:851a8282.3df38",
+        "z": "d736294e.f02228",
+        "name": "",
+        "x": 670,
+        "y": 1025,
+        "wires": [
+            [
+                "56e36b4c.012a54"
+            ]
+        ]
+    },
+    {
+        "id": "b579de3.b7f8a2",
+        "type": "api-current-state",
+        "z": "d736294e.f02228",
+        "name": "Current State of Lamp",
+        "server": "dbd7e060.40c7f",
+        "version": 1,
+        "outputs": 2,
+        "halt_if": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "override_topic": false,
+        "entity_id": "light.master_bedroom_liv_lamp",
+        "state_type": "str",
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "blockInputOverrides": false,
+        "x": 450,
+        "y": 1000,
+        "wires": [
+            [
+                "37804994.766a06"
+            ],
+            [
+                "bc41cc4b.ac9a3"
+            ]
+        ]
+    },
+    {
+        "id": "37804994.766a06",
+        "type": "api-call-service",
+        "z": "d736294e.f02228",
+        "name": "Turn Off Liv Lamp",
+        "server": "dbd7e060.40c7f",
+        "version": 1,
+        "service_domain": "light",
+        "service": "turn_off",
+        "entityId": "light.master_bedroom_liv_lamp",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 690,
+        "y": 975,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b4a0d188.70999",
+        "type": "api-call-service",
+        "z": "d736294e.f02228",
+        "name": "Turn On Gabe Lamp",
+        "server": "dbd7e060.40c7f",
+        "version": 1,
+        "service_domain": "light",
+        "service": "turn_on",
+        "entityId": "light.master_bedroom_gabe_lamp",
+        "data": "{\"kelvin\":\"{{ kelvin }}\"}",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 875,
+        "y": 1150,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2c60c692.bc4bda",
+        "type": "subflow:851a8282.3df38",
+        "z": "d736294e.f02228",
+        "name": "",
+        "x": 670,
+        "y": 1150,
+        "wires": [
+            [
+                "b4a0d188.70999"
+            ]
+        ]
+    },
+    {
+        "id": "a6c1547c.5b5cb8",
+        "type": "api-current-state",
+        "z": "d736294e.f02228",
+        "name": "Current State of Lamp",
+        "server": "dbd7e060.40c7f",
+        "version": 1,
+        "outputs": 2,
+        "halt_if": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "override_topic": false,
+        "entity_id": "light.master_bedroom_gabe_lamp",
+        "state_type": "str",
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "blockInputOverrides": false,
+        "x": 450,
+        "y": 1125,
+        "wires": [
+            [
+                "3ddbc16f.b6522e"
+            ],
+            [
+                "2c60c692.bc4bda"
+            ]
+        ]
+    },
+    {
+        "id": "3ddbc16f.b6522e",
+        "type": "api-call-service",
+        "z": "d736294e.f02228",
+        "name": "Turn Off Gabe Lamp",
+        "server": "dbd7e060.40c7f",
+        "version": 1,
+        "service_domain": "light",
+        "service": "turn_off",
+        "entityId": "light.master_bedroom_gabe_lamp",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 700,
+        "y": 1100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "101ef586.9a1e6a",
+        "type": "trigger-state",
+        "z": "d736294e.f02228",
+        "name": "Nightstand Pico Pressed",
+        "server": "dbd7e060.40c7f",
+        "entityid": "^sensor.master_bedroom_.*_pico$",
+        "entityidfiltertype": "regex",
+        "debugenabled": false,
+        "constraints": [],
+        "constraintsmustmatch": "all",
+        "outputs": 4,
+        "customoutputs": [
+            {
+                "outputId": "ry5a73t89ni",
+                "messageType": "payload",
+                "messageValue": "disable",
+                "messageValueType": "str",
+                "comparatorPropertyType": "current_state",
+                "comparatorPropertyValue": "new_state.state",
+                "comparatorType": "is_not",
+                "comparatorValue": "0"
+            },
+            {
+                "outputId": "h4qipcxv94j",
+                "messageType": "payload",
+                "messageValue": "enable",
+                "messageValueType": "str",
+                "comparatorPropertyType": "current_state",
+                "comparatorPropertyValue": "new_state.state",
+                "comparatorType": "is",
+                "comparatorValue": "0"
+            }
+        ],
+        "outputinitially": true,
+        "state_type": "str",
+        "x": 160,
+        "y": 1450,
+        "wires": [
+            [],
+            [],
+            [
+                "a3a09da8.711c2"
+            ],
+            [
+                "2994d934.06e196"
+            ]
+        ]
+    },
+    {
+        "id": "2994d934.06e196",
+        "type": "delay",
+        "z": "d736294e.f02228",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "100",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 270,
+        "y": 1525,
+        "wires": [
+            [
+                "a3a09da8.711c2"
+            ]
         ]
     }
 ]
