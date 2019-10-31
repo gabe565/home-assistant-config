@@ -81,45 +81,36 @@ input_select:
 scene:
   - name: Master Bedroom Babbling Brook Sounds
     entities:
-      input_select.master_bedroom_relax_sounds:
-        option: Babbling Brook
+      input_select.master_bedroom_relax_sounds: Babbling Brook
 
   - name: Master Bedroom Country Night Sounds
     entities:
-      input_select.master_bedroom_relax_sounds:
-        option: Country Night
+      input_select.master_bedroom_relax_sounds: Country Night
 
   - name: Master Bedroom Fireplace Sounds
     entities:
-      input_select.master_bedroom_relax_sounds:
-        option: Fireplace
+      input_select.master_bedroom_relax_sounds: Fireplace
 
   - name: Master Bedroom Forest Sounds
     entities:
-      input_select.master_bedroom_relax_sounds:
-        option: Forest
+      input_select.master_bedroom_relax_sounds: Forest
 
   - name: Master Bedroom Ocean Sounds
     entities:
-      input_select.master_bedroom_relax_sounds:
-        option: Ocean
+      input_select.master_bedroom_relax_sounds: Ocean
 
   - name: Master Bedroom Oscillating Fan Sounds
     entities:
-      input_select.master_bedroom_relax_sounds:
-        option: Oscillating Fan
+      input_select.master_bedroom_relax_sounds: Oscillating Fan
 
   - name: Master Bedroom Rain Sounds
     entities:
-      input_select.master_bedroom_relax_sounds:
-        option: Rain
+      input_select.master_bedroom_relax_sounds: Rain
 
   - name: Master Bedroom River Sounds
     entities:
-      input_select.master_bedroom_relax_sounds:
-        option: River
+      input_select.master_bedroom_relax_sounds: River
 
   - name: Master Bedroom Thunderstorm Sounds
     entities:
-      input_select.master_bedroom_relax_sounds:
-        option: Thunderstorm
+      input_select.master_bedroom_relax_sounds: Thunderstorm

@@ -36,8 +36,7 @@ scene:
 
   - name: Home
     entities:
-      climate.hallway:
-        preset_mode: home
+      climate.hallway: home
       group.kitchen_lights: true
       group.living_room_lights:
         state: true
@@ -49,17 +48,14 @@ scene:
     entities:
       group.master_bedroom_lights: true
       group.master_bathroom_lights: true
-      input_select.master_bedroom_relax_sounds:
-        option: 'Off'
+      input_select.master_bedroom_relax_sounds: 'Off'
       scene.home: true
 
   - name: Away
     entities:
-      climate.hallway:
-        preset_mode: away
+      climate.hallway: away
       group.indoor_lights: false
-      input_select.master_bedroom_relax_sounds:
-        option: 'Off'
+      input_select.master_bedroom_relax_sounds: 'Off'
       media_player.sony_bravia_tv: false
       switch.breath_of_the_wild_poster: false
 
