@@ -43,6 +43,10 @@ slate:
   paper-toggle-button-unchecked-button-color: 'var(--disabled-text-color)'
   paper-toggle-button-unchecked-bar-color: 'var(--disabled-text-color)'
   paper-toggle-button-unchecked-ink-color: 'var(--disabled-text-color)'
+  switch-checked-color: 'var(--paper-toggle-button-checked-button-color)'
+  switch-unchecked-color: 'var(--disabled-text-color)'
+  switch-unchecked-button-color: 'var(--disabled-text-color)'
+  switch-unchecked-track-color: 'var(--disabled-text-color)'
   # Sliders
   paper-slider-knob-color: '#2980b9'
   paper-slider-knob-start-color: '#2980b9'
@@ -79,3 +83,5 @@ slate:
   lumo-shade-10pct: 'rgba(34, 34, 34, .1)'
   lumo-shade-5pct: 'rgba(34, 34, 34, .05)'
   lumo-tint-5pct: '#222222'
+  # fix for device configuration screen
+  card-background-color: "var(--paper-card-background-color)"
