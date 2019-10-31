@@ -37,21 +37,21 @@ sensor:
       name: "${device_name} Current"
       filters:
         - exponential_moving_average:
-            alpha: 0.1
+            alpha: 0.5
             send_every: 3
         - delta: 0.1
     power:
       name: "${device_name} Power"
       filters:
         - exponential_moving_average:
-            alpha: 0.1
+            alpha: 0.5
             send_every: 3
         - delta: 0.5
     voltage:
       name: "${device_name} Voltage"
       filters:
         - exponential_moving_average:
-            alpha: 0.1
+            alpha: 0.5
             send_every: 3
         - delta: 0.5
     update_interval: 2s
