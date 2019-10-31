@@ -6,3 +6,11 @@ mqtt:
   discovery_prefix: homeassistant
   username: !secret mqtt_user
   password: !secret mqtt_password
+  birth_message:
+    topic: 'hass/status'
+    payload: 'online'
+    retain: true
+  will_message:
+    topic: 'hass/status'
+    payload: 'offline'
+    retain: true
