@@ -3,3 +3,28 @@ circadian_lighting:
   max_colortemp: 4500
   sunrise_offset: +01:00:00
   sunset_offset: +02:00:00
+
+switch:
+  - platform: circadian_lighting
+    name: Living Room
+    disable_brightness_adjust: true
+    lights_ct:
+      - light.living_room_indirect_light
+      - light.living_room_ceiling_fan_light
+      - light.living_room_small_lamp
+      - light.living_room_square_lamp
+      - light.living_room_tall_lamp
+
+  - platform: circadian_lighting
+    name: Master Bedroom
+    disable_brightness_adjust: true
+    lights_ct:
+      - light.master_bedroom_liv_lamp
+      - light.master_bedroom_gabe_lamp
+
+  - platform: circadian_lighting
+    name: Study
+    disable_brightness_adjust: true
+    lights_ct:
+      - light.study_left_lamp
+      - light.study_right_lamp
