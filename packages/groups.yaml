@@ -45,16 +45,8 @@ group:
 
   master_bedroom_lights:
     entities:
-      - light.master_bedroom_liv_lamp
-      - light.master_bedroom_gabe_lamp
+      - light.master_bedroom_lamp_group
       - light.master_bedroom_ceiling_fan_light
-    icon: mdi:hotel
-    name: "Master Bedroom Lights"
-
-  master_bedroom_lamps:
-    entities:
-      - light.master_bedroom_liv_lamp
-      - light.master_bedroom_gabe_lamp
     icon: mdi:hotel
     name: "Master Bedroom Lights"
 
@@ -76,7 +68,7 @@ group:
     entities:
       - light.master_bathroom_vanity_lights
       - light.master_closet_lights
-      - light.master_bathroom
+      - light.master_bathroom_light_group
     icon: mdi:shower
     name: "Master Bathroom Lights"
   
