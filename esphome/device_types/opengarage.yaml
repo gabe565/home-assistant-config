@@ -43,18 +43,37 @@ sensor:
     echo_pin: GPIO14
     name: "${device_name} Distance"
     id: distance
-    update_interval: 2s
+    update_interval: 500ms
     unit_of_measurement: cm
     timeout: 3m
     pulse_time: 20us
     filters:
       # Convert m to cm
       - multiply: 100
-      # Aggressive filtering is needed until median filter is released
-      - exponential_moving_average:
-          alpha: 0.1
-          send_every: 3
-      - delta: 10
+      # Take median of the last 5 values
+      # https://github.com/esphome/esphome/blob/0fc267dfc734c16868c8801d4e85782cc4e19f1f/esphome/components/sensor/filter.cpp#L42-L76
+      - lambda: |-
+          static std::deque<float> queue_;
+
+          while (queue_.size() >= 20) {
+            queue_.pop_front();
+          }
+          queue_.push_back(x);
+
+          float median = 0.0f;
+          if (!queue_.empty()) {
+            std::deque<float> median_queue = queue_;
+            sort(median_queue.begin(), median_queue.end());
+            size_t queue_size = median_queue.size();
+
+            if (queue_size % 2) {
+              median = median_queue[queue_size / 2];
+            } else {
+              median = (median_queue[queue_size / 2] + median_queue[(queue_size / 2) - 1]) / 2.0f;
+            }
+          }
+          return median;
+      - delta: 5
     on_value_range:
       # Garage door is OPEN if x < 30cm
       - below: 30
@@ -72,19 +91,21 @@ sensor:
       - above: 139
         then:
           - homeassistant.service:
-              service: device_tracker.see
+              service: mqtt.publish
               data:
-                dev_id: "${person}_car"
-                location_name: not_home
+                topic: "location/car/${person}"
+                payload: not_home
+                retain: "true"
       # Car is home if 49cm < x < 140cm
       - above: 49
         below: 140
         then:
           - homeassistant.service:
-              service: device_tracker.see
+              service: mqtt.publish
               data:
-                dev_id: "${person}_car"
-                location_name: home
+                topic: "location/car/${person}"
+                payload: home
+                retain: "true"
 
 status_led:
   pin:
