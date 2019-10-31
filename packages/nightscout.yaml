@@ -7,3 +7,10 @@ sensor:
   - platform: nightscout
     resource: !secret nightscout_url
     name: "Blood Sugar"
+
+  - platform: template
+    sensors:
+      blood_sugar_delta:
+        friendly_name: "Blood Sugar Delta"
+        unit_of_measurement: "mg/dl"
+        value_template: "{{ state_attr('sensor.blood_sugar', 'delta') }}"
