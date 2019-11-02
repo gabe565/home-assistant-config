@@ -1,0 +1,5 @@
+input_boolean:
+  outdoor_lights_day_cycle:
+    name: Outdoor Lights Day Cycle
+    initial: true
+    icon: mdi:weather-sunny
