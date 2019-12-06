@@ -25,6 +25,8 @@ binary_sensor:
     internal: true
     on_press:
       - switch.toggle: relay
+  - platform: status
+    name: "${device_name} Status"
 
 status_led:
   pin:
@@ -35,23 +37,24 @@ sensor:
   - platform: cse7766
     current:
       name: "${device_name} Current"
+      icon: mdi:flash-circle
       filters:
-        - exponential_moving_average:
-            alpha: 0.5
+        - sliding_window_moving_average:
+            window_size: 6
             send_every: 3
         - delta: 0.1
     power:
       name: "${device_name} Power"
+      icon: mdi:flash-circle
       filters:
-        - exponential_moving_average:
-            alpha: 0.5
+        - sliding_window_moving_average:
             send_every: 3
         - delta: 0.5
     voltage:
       name: "${device_name} Voltage"
+      icon: mdi:flash-circle
       filters:
-        - exponential_moving_average:
-            alpha: 0.5
+        - sliding_window_moving_average:
             send_every: 3
         - delta: 0.5
     update_interval: 2s
