@@ -1,0 +1,6 @@
+ombi:
+  host: !secret ombi_host
+  api_key: !secret ombi_api_key
+  username: !secret ombi_username
+  port: 443
+  ssl: true
