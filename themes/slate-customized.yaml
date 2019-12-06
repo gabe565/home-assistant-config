@@ -89,3 +89,5 @@ slate-customized:
   card-background-color: "var(--paper-card-background-color)"
 
   ha-card-border-radius: '5px'
+
+  st-mode-background: '#000'
