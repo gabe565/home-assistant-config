@@ -17,6 +17,10 @@ binary_sensor:
       mode: INPUT_PULLUP
     name: "${device_name} Motion"
     device_class: motion
+    filters:
+      - delayed_off: 1min
+  - platform: status
+    name: "${device_name} Status"
 
 switch:
   # Siren relay
